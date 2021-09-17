@@ -1,0 +1,24 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint --fix .",
+    "prettier": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write .",
+    "slint": "npx stylelint",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-metarhia": "^7.0.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "husky": "^7.0.2",
+    "prettier": "2.4.1"
+  }
+}
