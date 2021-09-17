@@ -1,102 +1,103 @@
 * {
-    box-sizing: border-box;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    --p50: 50%;
-    --bg-color-white: white;
-    --bg-color-pink: rgb(247, 204, 204);
-    --bg-color-green: rgb(188, 218, 188);
-    --bg-color-blue: rgb(139, 205, 233);
-    --text-margin: 10px;
-    --text-padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  --p50: 50%;
+  --bg-color-white: white;
+  --bg-color-pink: rgb(247, 204, 204);
+  --bg-color-green: rgb(188, 218, 188);
+  --bg-color-blue: rgb(139, 205, 233);
+  --text-margin: 10px;
+  --text-padding: 10px;
 }
 
-body{
-    display: grid;
-    width: var(--p50*2);
-    grid-template-rows: minmax(15vh,auto) minmax(85vh,auto);
+body {
+  display: grid;
+  width: var(--p50 * 2);
+  grid-template-rows: minmax(15vh, auto) minmax(85vh, auto);
 }
 
-header{
-    display: grid;
-    grid-template-columns: minmax(var(--p50),auto) minmax(var(--p50),auto);
-    background-color: var(--bg-color-blue);
+header {
+  display: grid;
+  grid-template-columns: minmax(var(--p50), auto) minmax(var(--p50), auto);
+  background-color: var(--bg-color-blue);
 }
 
-.centring{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: var(--text-padding);
+.centring {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: var(--text-padding);
 }
 
-.centring p{ 
-    width: var(--p50);
-    background-color: var(--bg-color-white);
-    text-align: right;
+.centring p {
+  width: var(--p50);
+  background-color: var(--bg-color-white);
+  text-align: right;
 }
 
-.end-center{
-    padding-right: var(--text-padding);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.end-center {
+  padding-right: var(--text-padding);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-main{
-    display: grid;
-    grid-template-columns: minmax(20%, auto) minmax(80%, auto);
+main {
+  display: grid;
+  grid-template-columns: minmax(20%, auto) minmax(80%, auto);
 }
 
-main aside{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: var(--text-padding);
-    background-color: var(--bg-color-pink);
+main aside {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--text-padding);
+  background-color: var(--bg-color-pink);
 }
 
-.right{
-    display: grid;
-    grid-template-rows: minmax(70%,auto) minmax(30%,auto);
+.right {
+  display: grid;
+  grid-template-rows: minmax(70%, auto) minmax(30%, auto);
 }
 
-.right-up{
-    display: grid;
-    grid-template-columns: minmax(var(--p50), auto) minmax(15%, auto);
+.right-up {
+  display: grid;
+  grid-template-columns: minmax(var(--p50), auto) minmax(15%, auto);
 }
 
-nav{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-color-white);
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color-white);
 }
 
-.right-up-right{
-    display: grid;
-    grid-template-rows: minmax(var(--p50),auto) minmax(var(--p50),auto);
+.right-up-right {
+  display: grid;
+  grid-template-rows: minmax(var(--p50), auto) minmax(var(--p50), auto);
 }
 
-.right-up-right-up{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: var(--text-padding);
-    background-color: var(--bg-color-pink);
+.right-up-right-up {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: var(--text-padding);
+  background-color: var(--bg-color-pink);
 }
 
-.right-up-right-down{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: var(--text-padding);
-    background-color: var(--bg-color-blue);
+.right-up-right-down {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: var(--text-padding);
+  background-color: var(--bg-color-blue);
 }
 
-footer{
-    display: grid;
-    grid-template-columns: minmax(var(--p50),auto) minmax(var(--p50), auto);
-    background-color: var(--bg-color-green);
+footer {
+  display: grid;
+  grid-template-columns: minmax(var(--p50), auto) minmax(var(--p50), auto);
+  background-color: var(--bg-color-green);
 }
