@@ -9,7 +9,7 @@
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "slint": "npx stylelint \"**/*.css\"",
-    "slint:fix": "npx stylelint --fix",
+    "slint:fix": "npx stylelint \"**/*.css\" --fix",
     "prepare": "husky install"
   },
   "author": "",
