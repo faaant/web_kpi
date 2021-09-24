@@ -16,7 +16,7 @@
 body {
   display: grid;
   width: 100%;
-  grid-template-rows: minmax(50px, 15vh) minmax(auto, 85vh);
+  grid-template-rows: minmax(max-content, 15vh) minmax(auto, 85vh);
 }
 
 header {
@@ -61,7 +61,7 @@ main aside {
 
 .right {
   display: grid;
-  grid-template-rows: minmax(60vh, auto) minmax(60px, 25vh);
+  grid-template-rows: minmax(60vh, auto) minmax(max-content, 25vh);
 }
 
 .right > .up {
