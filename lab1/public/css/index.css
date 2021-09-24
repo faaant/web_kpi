@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 
@@ -11,17 +10,18 @@
   --bg-color-blue: rgb(139, 205, 233);
   --text-margin: 10px;
   --text-padding: 10px;
+  --text-indent: 10px;
 }
 
 body {
   display: grid;
   width: var(--p50 * 2);
-  grid-template-rows: minmax(15vh, auto) minmax(85vh, auto);
+  grid-template-rows: minmax(auto, 15vh) minmax(auto, 85vh);
 }
 
 header {
   display: grid;
-  grid-template-columns: minmax(var(--p50), auto) minmax(var(--p50), auto);
+  grid-template-columns: minmax(auto, 50%) minmax(auto, 50%);
   background-color: var(--bg-color-blue);
 }
 
@@ -47,7 +47,7 @@ header {
 
 main {
   display: grid;
-  grid-template-columns: minmax(20%, auto) minmax(80%, auto);
+  grid-template-columns: minmax(auto, 20%) minmax(auto, 80%);
 }
 
 main aside {
@@ -60,12 +60,12 @@ main aside {
 
 .right {
   display: grid;
-  grid-template-rows: minmax(70%, auto) minmax(30%, auto);
+  grid-template-rows: minmax(60vh, auto) minmax(auto, 25vh);
 }
 
-.right-up {
+.right > .up {
   display: grid;
-  grid-template-columns: minmax(var(--p50), auto) minmax(15%, auto);
+  grid-template-columns: minmax(auto, 70%) minmax(auto, 30%);
 }
 
 nav {
@@ -75,29 +75,29 @@ nav {
   background-color: var(--bg-color-white);
 }
 
-.right-up-right {
+.right > .up > .right {
   display: grid;
-  grid-template-rows: minmax(var(--p50), auto) minmax(var(--p50), auto);
+  grid-template-rows: minmax(30vh, auto) minmax(30vh, auto);
 }
 
-.right-up-right-up {
+.right > .up > .right > .up {
   display: flex;
+  text-indent: var(--text-indent);
   justify-content: flex-start;
   align-items: center;
-  padding-left: var(--text-padding);
   background-color: var(--bg-color-pink);
 }
 
-.right-up-right-down {
+.right > .up > .right > .down {
   display: flex;
+  text-indent: var(--text-indent);
   justify-content: flex-start;
   align-items: center;
-  padding-left: var(--text-padding);
   background-color: var(--bg-color-blue);
 }
 
 footer {
   display: grid;
-  grid-template-columns: minmax(var(--p50), auto) minmax(var(--p50), auto);
+  grid-template-columns: minmax(auto, 50%) minmax(auto, 50%);
   background-color: var(--bg-color-green);
 }
