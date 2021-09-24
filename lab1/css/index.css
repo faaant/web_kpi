@@ -15,8 +15,8 @@
 
 body {
   display: grid;
-  width: var(--p50 * 2);
-  grid-template-rows: minmax(auto, 15vh) minmax(auto, 85vh);
+  width: 100%;
+  grid-template-rows: minmax(50px, 15vh) minmax(auto, 85vh);
 }
 
 header {
@@ -47,7 +47,8 @@ header {
 
 main {
   display: grid;
-  grid-template-columns: minmax(auto, 20%) minmax(auto, 80%);
+  grid-template-columns: minmax(80px, 20%) minmax(400px, 80%);
+  height: fit-content;
 }
 
 main aside {
@@ -60,7 +61,7 @@ main aside {
 
 .right {
   display: grid;
-  grid-template-rows: minmax(60vh, auto) minmax(auto, 25vh);
+  grid-template-rows: minmax(60vh, auto) minmax(60px, 25vh);
 }
 
 .right > .up {
