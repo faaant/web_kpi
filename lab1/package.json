@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint . '--ignore-path .gitignor' ",
+    "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
     "lint:fix": "npx eslint --fix .",
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
-    "slint": "npx stylelint",
+    "slint": "npx stylelint \"**/*.css\"",
     "slint:fix": "npx stylelint --fix",
     "prepare": "husky install"
   },
