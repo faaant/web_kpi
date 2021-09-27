@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
-    "lint:fix": "npx eslint --fix .",
-    "prettier": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write .",
-    "slint": "npx stylelint \"**/*.css\"",
-    "slint:fix": "npx stylelint \"**/*.css\" --fix",
+    "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "slint": "stylelint \"**/*.css\"",
+    "slint:fix": "stylelint \"**/*.css\" --fix",
     "prepare": "husky install"
   },
   "author": "",
