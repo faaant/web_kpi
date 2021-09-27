@@ -5,4 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          cache: "npm"
       - run: npm ci && npm run prettier && npm run lint && npm run slint
