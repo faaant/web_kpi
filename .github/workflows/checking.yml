@@ -8,4 +8,4 @@ jobs:
         with:
           cache: "npm"
       - run: cd lab1 && npm ci && npm run prettier && npm run lint && npm run slint && cd ../
-      - run: cd lab2 && npm ci && npm run prettier && npm run lint && npm run slint && cd ../
+      - run: cd lab2 && npm ci && npm run prettier && npm run lint && npm run slint
