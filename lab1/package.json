@@ -1,0 +1,25 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "slint": "stylelint \"**/*.css\"",
+    "slint:fix": "stylelint \"**/*.css\" --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-metarhia": "^7.0.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "prettier": "2.4.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
+  }
+}
