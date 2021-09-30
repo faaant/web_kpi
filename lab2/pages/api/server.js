@@ -6,14 +6,12 @@ const rateLimit = require("lambda-rate-limiter")({
 }).check;
 
 export default async function handler(req, res) {
-  let testAccount = await nodemailer.createTestAccount();
-
   try {
     await rateLimit(2, req.headers["client-ip"]);
   } catch (error) {
     res.status(429).json(error);
   }
-
+  let testAccount = await nodemailer.createTestAccount();
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
