@@ -31,7 +31,6 @@ export default function Home() {
             form.lastChild.firstChild.classList.remove(styles.hidden);
             form.lastChild.removeChild(form.lastChild.lastChild);
             alert("Mail sent!");
-            document.location.reload();
           } else if (resp.status === 429) {
             form.lastChild.firstChild.classList.remove(styles.hidden);
             form.lastChild.removeChild(form.lastChild.lastChild);
@@ -41,6 +40,7 @@ export default function Home() {
             form.lastChild.removeChild(form.lastChild.lastChild);
             alert("Request failed!");
           }
+          document.location.reload();
         })
         .catch((e) => console.log(e));
     }
