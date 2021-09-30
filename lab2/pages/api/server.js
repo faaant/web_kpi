@@ -1,8 +1,18 @@
 import sanitizeHtml from "sanitize-html";
 const nodemailer = require("nodemailer");
 
+const rateLimit = require("lambda-rate-limiter")({
+  interval: 60 * 1000,
+}).check;
+
 export default async function handler(req, res) {
   let testAccount = await nodemailer.createTestAccount();
+
+  try {
+    await rateLimit(2, req.headers["client-ip"]);
+  } catch (error) {
+    res.status(429).json(error);
+  }
 
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",

@@ -32,6 +32,14 @@ export default function Home() {
             form.lastChild.removeChild(form.lastChild.lastChild);
             alert("Mail sent!");
             document.location.reload();
+          } else if (resp.status === 429) {
+            form.lastChild.firstChild.classList.remove(styles.hidden);
+            form.lastChild.removeChild(form.lastChild.lastChild);
+            alert("Too many requests!");
+          } else {
+            form.lastChild.firstChild.classList.remove(styles.hidden);
+            form.lastChild.removeChild(form.lastChild.lastChild);
+            alert("Request failed!");
           }
         })
         .catch((e) => console.log(e));
