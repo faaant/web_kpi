@@ -1,0 +1,103 @@
+.sender {
+  color: grey;
+  border: solid #303952 2px;
+  height: 80%;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 5px;
+  border-top-left-radius: 10px;
+}
+
+.recipient {
+  color: grey;
+  border: solid #303952 2px;
+  height: 80%;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 5px;
+  border-bottom-left-radius: 10px;
+}
+
+.centring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  [name^="mail"] {
+    background-color: transparent;
+    width: 100%;
+    height: 80%;
+    text-indent: 5px;
+    border: none;
+    outline: none;
+    border-top: dashed #688d92 1px;
+    border-bottom: solid #688d92 1.5px;
+    border-right: solid #688d92 1.5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  [name="letterValue"] {
+    background-color: transparent;
+    border: solid rgb(212, 212, 212) 2px;
+    border-top: none;
+    padding: 10px 0 0 10px;
+    width: 100%;
+    height: 98%;
+    outline: none;
+    resize: none;
+  }
+}
+
+.errorEmail {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: -40%;
+  padding-left: 5px;
+  text-indent: 10px;
+  width: 200px;
+  height: 30px;
+  border-left: solid #688d92 2px;
+
+  img {
+    height: 30px;
+  }
+
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  img {
+    position: absolute;
+    height: 200px;
+  }
+
+  [type="submit"] {
+    background-color: transparent;
+    width: 50%;
+    height: 80%;
+    border: dashed #688d92 1px;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

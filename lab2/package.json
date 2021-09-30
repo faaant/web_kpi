@@ -1,0 +1,31 @@
+{
+  "name": "lab2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "prettier": "prettier --check . --no-error-on-unmatched-pattern --ignore-path .prettierignore",
+    "prettier:fix": "prettier --write . --no-error-on-unmatched-pattern --ignore-path .prettierignore",
+    "slint": "stylelint \"**/*.scss\"",
+    "slint:fix": "stylelint \"**/*.scss\" --fix"
+  },
+  "dependencies": {
+    "next": "11.1.2",
+    "nodemailer": "^6.6.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sanitize-html": "^2.5.1",
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "prettier": "2.4.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
+  }
+}

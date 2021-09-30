@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd lab1 && npm run lint && npm run prettier && npm run slint && cd ../
-
+cd lab2 && npm run lint && npm run prettier && npm run slint && cd ../
