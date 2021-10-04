@@ -5,7 +5,7 @@ const rateLimit = require("lambda-rate-limiter")({
 
 export default async function handler(req, res) {
   try {
-    await rateLimit(100, req.headers["x-forwarded-for"]);
+    await rateLimit(2, req.headers["x-forwarded-for"][0]);
   } catch (error) {
     res.status(429).json({ message: "Too many requests!" });
     return;
