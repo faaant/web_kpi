@@ -26,7 +26,6 @@ export default function Home() {
         where: e.target.mailWhere.value,
         letter: e.target.letterValue.value,
       };
-      console.log(JSON.stringify(bodyToSend));
       fetch("/api/server", {
         method: "POST",
         headers: {
