@@ -5,7 +5,7 @@ const rateLimit = require("lambda-rate-limiter")({
 
 export default async function handler(req, res) {
   try {
-    await rateLimit(100, req.headers["x-forwarded-for"][0]);
+    await rateLimit(100, req.headers["x-forwarded-for"]);
   } catch (error) {
     res.status(429).json({ message: "Too many requests!" });
     return;
@@ -25,9 +25,15 @@ export default async function handler(req, res) {
     text: req.body.letter, // plain text body
     html: req.body.letter, // html body
   };
-
   try {
-    fetch("/api/checking", {
+    var sendInfo = {
+      from: null, // sender address
+      to: null, // recipient
+      subject: "Subject", // Subject line
+      text: null, // plain text body
+      html: null,
+    };
+    await fetch("https://web-kpi-git-lab2-faaant.vercel.app/api/checking", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +44,7 @@ export default async function handler(req, res) {
         return resp.json();
       })
       .then((data) => {
-        bodyToSend = {
+        sendInfo = {
           from: data.from, // sender address
           to: data.to, // list of receivers
           subject: data.subject, // Subject line
@@ -51,11 +57,11 @@ export default async function handler(req, res) {
   }
   try {
     let info = await transporter.sendMail({
-      from: bodyToSend.from, // sender address
-      to: bodyToSend.to, // list of receivers
-      subject: bodyToSend.subject, // Subject line
-      text: bodyToSend.text, // plain text body
-      html: bodyToSend.html, // html body
+      from: sendInfo.from, // sender address
+      to: sendInfo.to, // list of receivers
+      subject: sendInfo.subject, // Subject line
+      text: sendInfo.text, // plain text body
+      html: sendInfo.html, // html body
     });
   } catch (error) {
     return res.status(500).json({ message: "Connect to mailer failed!" });
