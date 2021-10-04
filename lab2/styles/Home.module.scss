@@ -1,103 +1,121 @@
-.sender {
-  color: grey;
-  border: solid #303952 2px;
-  height: 80%;
-  width: 20%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 5px;
-  border-top-left-radius: 10px;
-}
-
-.recipient {
-  color: grey;
-  border: solid #303952 2px;
-  height: 80%;
-  width: 20%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 5px;
-  border-bottom-left-radius: 10px;
-}
-
-.centring {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+.mainContent {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 0.5vw;
+  grid-template-rows: minmax(auto, 5vh) minmax(auto, 5vh) minmax(auto, 60vh) minmax(auto, 10vh);
+  grid-template-columns: minmax(auto, 10vw) minmax(auto, 50vw);
+  padding: var(--padding-15px);
 
   [name^="mail"] {
     background-color: transparent;
     width: 100%;
-    height: 80%;
+    height: 90%;
     text-indent: 5px;
     border: none;
     outline: none;
-    border-top: dashed #688d92 1px;
-    border-bottom: solid #688d92 1.5px;
-    border-right: solid #688d92 1.5px;
+    border-top: var(--sea-dashed-border-1px);
+    border-bottom: var(--sea-solid-border-1-5px);
+    border-right: var(--sea-solid-border-1-5px);
     border-bottom-right-radius: 5px;
   }
 
   [name="letterValue"] {
+    grid-column-start: 1;
+    grid-column-end: 3;
     background-color: transparent;
-    border: solid rgb(212, 212, 212) 2px;
+    border: var(--light-gray-border-2px);
     border-top: none;
-    padding: 10px 0 0 10px;
+    padding: var(--padding-10px) 0 0 var(--padding-10px);
     width: 100%;
     height: 98%;
     outline: none;
     resize: none;
   }
-}
 
-.errorEmail {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: -40%;
-  padding-left: 5px;
-  text-indent: 10px;
-  width: 200px;
-  height: 30px;
-  border-left: solid #688d92 2px;
-
-  img {
-    height: 30px;
+  .Button {
+    grid-column-start: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
-  visibility: hidden;
 }
 
-.visible {
-  visibility: visible;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.left {
+.sender {
+  color: var(--text-gray);
+  border: var(--darkblue-border-2px);
+  height: 90%;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-right: var(--padding-5px);
+  border-top-left-radius: 10px;
 
-  img {
-    position: absolute;
-    height: 200px;
+  @media (max-width: 800px) {
+    font-size: 2vw;
   }
 
-  [type="submit"] {
-    background-color: transparent;
-    width: 50%;
-    height: 80%;
-    border: dashed #688d92 1px;
-    outline: none;
-
-    &:hover {
-      cursor: pointer;
-    }
+  @media (max-width: 700px) {
+    font-size: 1.8vw;
   }
+
+  @media (max-width: 500px), (max-height: 400px) {
+    font-size: 1.5vw;
+  }
+
+  @media (max-width: 400px), (max-height: 300px) {
+    font-size: 1vw;
+  }
+
+  @media (max-width: 180px), (max-height: 190px) {
+    font-size: 0.5vw;
+  }
+
+  @media (max-width: 100px), (max-height: 100px) {
+    font-size: 0.1vw;
+  }
+}
+
+.recipient {
+  color: var(--text-gray);
+  border: var(--darkblue-border-2px);
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--padding-5px);
+  border-bottom-left-radius: 10px;
+
+  @media (max-width: 800px) {
+    font-size: 2vw;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 1.8vw;
+  }
+
+  @media (max-width: 500px), (max-height: 400px) {
+    font-size: 1.5vw;
+  }
+
+  @media (max-width: 400px), (max-height: 300px) {
+    font-size: 1vw;
+  }
+
+  @media (max-width: 180px), (max-height: 190px) {
+    font-size: 0.5vw;
+  }
+
+  @media (max-width: 100px), (max-height: 100px) {
+    font-size: 0.1vw;
+  }
+}
+
+.where {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

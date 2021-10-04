@@ -1,0 +1,54 @@
+.messager {
+  position: absolute;
+  top: -5%;
+  left: 35%;
+  width: 40%;
+  height: 10%;
+  border: var(--light-black-border-1px);
+  background-color: darkcyan;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.errorEmail {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 105%;
+  padding-left: var(--padding-5px);
+  text-indent: var(--padding-10px);
+  width: fit-content;
+  height: 100%;
+  border-left: var(--sea-solid-border-1-5px);
+
+  img {
+    height: 100%;
+  }
+}
+
+.left {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  img {
+    height: 250%;
+  }
+
+  [type="submit"] {
+    background-color: transparent;
+    width: 50%;
+    height: 80%;
+    border: dashed #688d92 1px;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

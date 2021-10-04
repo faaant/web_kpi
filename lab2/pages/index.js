@@ -1,24 +1,32 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
 import isEmail from "../src/checkEmail";
+import { useState } from "react";
+import Button from "../components/Button";
+import MailError from "../components/mailEror";
+import Messager from "../components/Messager";
 
 export default function Home() {
+  const [spinnerVisibility, setSpinnerVisibility] = useState(false);
+  const [mailErrorVisibility, setMailErrorVisibility] = useState(false);
+  const [message, setMessage] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  function setter() {
+    setMessage("");
+    setDisabled(false);
+  }
+
   function prevent(e) {
     e.preventDefault();
-    if (checkInfo()) {
-      alert("Request sent");
-      const form = document.querySelector("form");
-      form.lastChild.firstChild.classList.add(styles.hidden);
-      var spinner = document.createElement("img");
-      spinner.src = "/Loader.gif";
-      spinner.alt = "loader";
-      form.lastChild.appendChild(spinner);
-
+    if (checkInfo(e.target.mailWhere.value)) {
+      setSpinnerVisibility(true);
       const bodyToSend = {
-        from: form.mailFrom.value,
-        where: form.mailWhere.value,
-        letter: form.letterValue.value,
+        from: e.target.mailFrom.value,
+        where: e.target.mailWhere.value,
+        letter: e.target.letterValue.value,
       };
+      console.log(JSON.stringify(bodyToSend));
       fetch("/api/server", {
         method: "POST",
         headers: {
@@ -27,49 +35,30 @@ export default function Home() {
         body: JSON.stringify(bodyToSend),
       })
         .then((resp) => {
-          if (resp.ok) {
-            form.lastChild.firstChild.classList.remove(styles.hidden);
-            form.lastChild.removeChild(form.lastChild.lastChild);
-            alert("Mail sent!");
-          } else if (resp.status === 429) {
-            form.lastChild.firstChild.classList.remove(styles.hidden);
-            form.lastChild.removeChild(form.lastChild.lastChild);
-            alert("Too many requests!");
-          } else {
-            form.lastChild.firstChild.classList.remove(styles.hidden);
-            form.lastChild.removeChild(form.lastChild.lastChild);
-            alert("Request failed!");
-          }
-          document.location.reload();
+          return resp.json();
         })
-        .catch((e) => console.log(e));
+        .then((data) => {
+          setMessage(data.message);
+          setSpinnerVisibility(false);
+          setDisabled(true);
+          setTimeout(setter, 2000);
+        })
+        .catch((e) => {
+          setSpinnerVisibility(false);
+          setMessage("");
+          setDisabled(false);
+        });
     }
   }
 
-  function checkInfo() {
-    const form = document.querySelector("form");
-    const from = isEmail(form.mailFrom.value);
-    const where = isEmail(form.mailWhere.value);
-    if (from && where) {
-      form.firstChild.firstChild.classList.remove(styles.visible);
-      form.childNodes[1].firstChild.classList.remove(styles.visible);
+  function checkInfo(mailWhere) {
+    const where = isEmail(mailWhere);
+    if (where) {
+      setMailErrorVisibility(false);
       return true;
-    } else {
-      if (!from) {
-        form.firstChild.firstChild.classList.add(styles.visible);
-      } else {
-        form.firstChild.firstChild.classList.remove(styles.visible);
-      }
-
-      var errWhere = document.getElementById("whereError");
-      if (!where) {
-        form.childNodes[1].firstChild.classList.add(styles.visible);
-      } else {
-        form.childNodes[1].firstChild.classList.remove(styles.visible);
-      }
-
-      return false;
     }
+    setMailErrorVisibility(true);
+    return false;
   }
 
   return (
@@ -78,12 +67,9 @@ export default function Home() {
         <title>Mailer</title>
         <link rel="shortcut icon" type="image/png" href="/mail.png" />
       </Head>
+      <Messager message={message} />
       <form onSubmit={prevent}>
-        <div className={styles.centring}>
-          <div className={styles.errorEmail} id="fromError">
-            <img src="/emailError.png" alt="error" />
-            Enter correct email!
-          </div>
+        <div className={styles.mainContent}>
           <div className={styles.sender}>Sender:</div>
           <input
             type="text"
@@ -91,25 +77,20 @@ export default function Home() {
             value="lilly.nader5@ethereal.email"
             disabled
           />
-        </div>
-        <div className={styles.centring}>
-          <div className={styles.errorEmail} id="whereError">
-            <img src="/emailError.png" alt="error" />
-            Enter correct email!
-          </div>
           <div className={styles.recipient}>Recipient:</div>
-          <input type="text" name="mailWhere" required />
-        </div>
-        <div className={styles.centring}>
+          <div className={styles.where}>
+            <input type="text" name="mailWhere" required />
+            <MailError visibility={mailErrorVisibility} />
+          </div>
           <textarea
             name="letterValue"
             placeholder="Text of the letter..."
             maxLength="1250"
             required
           ></textarea>
-        </div>
-        <div className={styles.left}>
-          <input type="submit" value="Send" />
+          <div className={styles.Button}>
+            <Button visibility={spinnerVisibility} isDisabled={disabled} />
+          </div>
         </div>
       </form>
     </>

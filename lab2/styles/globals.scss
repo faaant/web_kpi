@@ -1,7 +1,7 @@
 html,
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   padding: 0;
   margin: 0;
   font-family:
@@ -19,16 +19,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  #__next {
+    position: relative;
+  }
 }
 
 form {
-  min-width: 600px;
-  min-height: 450px;
-  //background: linear-gradient(to top left, #63cdda, #f5cd79);
+  width: 100%;
+  height: 100%;
   box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3), -5px -10px 20px rgba(255, 255, 255, 0.5);
-  display: grid;
-  grid-template-rows: minmax(30px, 1fr) minmax(30px, 1fr) minmax(70px, 9fr) minmax(30px, 2fr);
-  padding: 15px;
 }
 
 a {
@@ -38,4 +38,14 @@ a {
 
 * {
   box-sizing: border-box;
+
+  --darkblue-border-2px: solid #303952 2px;
+  --sea-solid-border-1-5px: solid #688d92 1.5px;
+  --sea-dashed-border-1px: dashed #688d92 1px;
+  --light-gray-border-2px: solid rgb(212, 212, 212) 2px;
+  --light-black-border-1px: solid black 1px;
+  --text-gray: gray;
+  --padding-5px: 5px;
+  --padding-10px: 10px;
+  --padding-15px: 15px;
 }
