@@ -22,7 +22,6 @@ export default async function handler(req, res) {
       pass: process.env.MAIL_PASSWORD,
     },
   });
-  console.log(process.env.MAIL_PASSWORD);
 
   for (let key in req.body) {
     if (!req.body[key]) {
