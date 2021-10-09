@@ -19,3 +19,5 @@ jobs:
       - name: Check folder Lab2
         working-directory: lab2
         run: npm ci && npm run prettier && npm run lint && npm run slint
+        env: 
+          mail_password: ${{ secrets.mail_password }}
