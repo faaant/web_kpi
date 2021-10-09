@@ -1,15 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-function get_commit {
-    git log --oneline -- $1 | head -n 1 | cut -d " " -f1
-}
 
-ROOT_COMMIT=$(get_commit)
-SUBDIR_COMMIT=$(get_commit my/subdir/path)
-
-if [ "$SUBDIR_COMMIT" == "$ROOT_COMMIT" ]; then
-    npm run lint && npm run prettier && npm run slint
-fi
-
-# cd lab1 && npm run lint && npm run prettier && npm run slint && cd ../
-# cd lab2 && npm run lint && npm run prettier && npm run slint && cd ../
+cd lab1 && npm run lint && npm run prettier && npm run slint && cd ../
+cd lab2 && npm run lint && npm run prettier && npm run slint && cd ../

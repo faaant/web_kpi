@@ -1,3 +1,6 @@
+import isEmail from "../../src/checkEmail";
+import sanitizeHtml from "sanitize-html";
+
 const nodemailer = require("nodemailer");
 const rateLimit = require("lambda-rate-limiter")({
   interval: 60 * 1000,
@@ -5,11 +8,12 @@ const rateLimit = require("lambda-rate-limiter")({
 
 export default async function handler(req, res) {
   try {
-    await rateLimit(2, req.headers["x-forwarded-for"][0]);
+    await rateLimit(2, req.headers["x-forwarded-for"]); //[0]
   } catch (error) {
     res.status(429).json({ message: "Too many requests!" });
     return;
   }
+
   const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
@@ -18,51 +22,34 @@ export default async function handler(req, res) {
       pass: "x9dVcEyxFRGpYudn1s",
     },
   });
-  const bodyToSend = {
-    from: req.body.from, // sender address
-    to: req.body.where, // recipient
-    subject: "Subject", // Subject line
-    text: req.body.letter, // plain text body
-    html: req.body.letter, // html body
-  };
-  try {
-    var sendInfo = {
-      from: null, // sender address
-      to: null, // recipient
-      subject: "Subject", // Subject line
-      text: null, // plain text body
-      html: null,
-    };
-    await fetch("https://web-kpi-git-lab2-faaant.vercel.app/api/checking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bodyToSend),
-    })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        sendInfo = {
-          from: data.from, // sender address
-          to: data.to, // list of receivers
-          subject: data.subject, // Subject line
-          text: data.text, // plain text body
-          html: data.html, // html body
-        };
-      });
-  } catch (error) {
-    return res.status(500).json({ message: "Request failed" });
+
+  for (let key in req.body) {
+    if (!req.body[key]) {
+      return res
+        .status(500)
+        .json({ message: "No one field shouldn't be empty!" });
+    }
   }
+
+  if (!isEmail(req.body.from) || !isEmail(req.body.where)) {
+    return res.status(500).json({ message: "Enter correct email, pls." });
+  }
+
+  const clearHtml = sanitizeHtml(req.body.letter);
+  if (!clearHtml) {
+    return res.status(500).json({ message: "Enter safe information!" });
+  }
+
+  const bodyToSend = {
+    from: req.body.from,
+    to: req.body.where,
+    subject: "Subject",
+    text: req.body.letter,
+    html: clearHtml,
+  };
+
   try {
-    let info = await transporter.sendMail({
-      from: sendInfo.from, // sender address
-      to: sendInfo.to, // list of receivers
-      subject: sendInfo.subject, // Subject line
-      text: sendInfo.text, // plain text body
-      html: sendInfo.html, // html body
-    });
+    let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
     return res.status(500).json({ message: "Connect to mailer failed!" });
   }

@@ -8,7 +8,13 @@ import Messager from "../components/Messager";
 
 export default function Home() {
   const [spinnerVisibility, setSpinnerVisibility] = useState(false);
-  const [mailErrorVisibility, setMailErrorVisibility] = useState(false);
+  const [
+    { mailErrorVisibilityFrom, mailErrorVisibilityWhere },
+    setMailErrorVisibility,
+  ] = useState({
+    mailErrorVisibilityFrom: false,
+    mailErrorVisibilityWhere: false,
+  });
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(false);
 
@@ -19,7 +25,7 @@ export default function Home() {
 
   function prevent(e) {
     e.preventDefault();
-    if (checkInfo(e.target.mailWhere.value)) {
+    if (checkInfo(e.target.mailWhere.value, e.target.mailFrom.value)) {
       setSpinnerVisibility(true);
       const bodyToSend = {
         from: e.target.mailFrom.value,
@@ -50,14 +56,14 @@ export default function Home() {
     }
   }
 
-  function checkInfo(mailWhere) {
+  function checkInfo(mailWhere, mailFrom) {
     const where = isEmail(mailWhere);
-    if (where) {
-      setMailErrorVisibility(false);
-      return true;
-    }
-    setMailErrorVisibility(true);
-    return false;
+    const from = isEmail(mailFrom);
+    setMailErrorVisibility({
+      mailErrorVisibilityFrom: !from,
+      mailErrorVisibilityWhere: !where,
+    });
+    return where && from;
   }
 
   return (
@@ -70,16 +76,24 @@ export default function Home() {
       <form onSubmit={prevent}>
         <div className={styles.mainContent}>
           <div className={styles.sender}>Sender:</div>
-          <input
-            type="text"
-            name="mailFrom"
-            value="lilly.nader5@ethereal.email"
-            disabled
-          />
+          <div className={styles.mail}>
+            <input
+              type="text"
+              name="mailFrom"
+              placeholder="example@mail.com"
+              required
+            />
+            <MailError visibility={mailErrorVisibilityFrom} />
+          </div>
           <div className={styles.recipient}>Recipient:</div>
-          <div className={styles.where}>
-            <input type="text" name="mailWhere" required />
-            <MailError visibility={mailErrorVisibility} />
+          <div className={styles.mail}>
+            <input
+              type="text"
+              name="mailWhere"
+              placeholder="example@mail.com"
+              required
+            />
+            <MailError visibility={mailErrorVisibilityWhere} />
           </div>
           <textarea
             name="letterValue"
