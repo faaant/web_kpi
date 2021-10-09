@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     port: 587,
     auth: {
       user: "lilly.nader5@ethereal.email",
-      pass: process.env.mail_password,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
