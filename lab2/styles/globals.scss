@@ -1,7 +1,7 @@
 html,
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   padding: 0;
   margin: 0;
   font-family:
@@ -16,19 +16,19 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   #__next {
-    position: relative;
+    height: 100vh;
+    width: 100vw;
   }
 }
 
 form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3), -5px -10px 20px rgba(255, 255, 255, 0.5);
 }
 
 a {
@@ -39,6 +39,7 @@ a {
 * {
   box-sizing: border-box;
 
+  --bg-light-grey: rgb(221, 216, 216);
   --darkblue-border-2px: solid #303952 2px;
   --sea-solid-border-1-5px: solid #688d92 1.5px;
   --sea-dashed-border-1px: dashed #688d92 1px;

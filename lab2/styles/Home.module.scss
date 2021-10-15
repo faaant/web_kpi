@@ -1,13 +1,12 @@
 .mainContent {
-  width: 100%;
-  height: 100%;
   display: grid;
   grid-gap: 0.5vw;
-  grid-template-rows: minmax(auto, 5vh) minmax(auto, 5vh) minmax(auto, 60vh) minmax(auto, 10vh);
+  grid-template-rows: minmax(auto, 5vh) minmax(auto, 60vh) minmax(auto, 10vh);
   grid-template-columns: minmax(auto, 10vw) minmax(auto, 50vw);
   padding: var(--padding-15px);
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3), -5px -10px 20px rgba(255, 255, 255, 0.5);
 
-  [name^="mail"] {
+  [name^="Email"] {
     background-color: transparent;
     width: 100%;
     height: 90%;
