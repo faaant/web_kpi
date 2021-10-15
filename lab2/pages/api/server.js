@@ -8,7 +8,7 @@ const rateLimit = require("lambda-rate-limiter")({
 
 export default async function handler(req, res) {
   try {
-    await rateLimit(2, req.headers["x-forwarded-for"][0]);
+    await rateLimit(10, req.headers["x-forwarded-for"][0]);
   } catch (error) {
     return res.json({
       id: new Date() + " rate limit" + req.headers["x-forwarded-for"],
@@ -44,17 +44,9 @@ export default async function handler(req, res) {
     if (!req.body[key]) {
       return res.json({
         id: new Date() + " check not null" + req.headers["x-forwarded-for"],
-        links: {
-          about: error.about,
-        },
         status: "500",
-        code: error.code,
         title: "Request failed",
         detail: "All keys must have not null values.",
-        source: {
-          pointer: error.pointer,
-          parametr: error.parametr,
-        },
         meta: {
           data: {
             message: "No one field shouldn't be empty!",
@@ -64,20 +56,12 @@ export default async function handler(req, res) {
     }
   }
 
-  if (!isEmail(req.body.Email)) {
+  if (!isEmail(req.body.email)) {
     return res.status(500).json({
       id: new Date() + " check mail" + req.headers["x-forwarded-for"],
-      links: {
-        about: error.about,
-      },
       status: "500",
-      code: error.code,
       title: "Request failed",
       detail: "User enetered uncorrect e-mail.",
-      source: {
-        pointer: error.pointer,
-        parametr: error.parametr,
-      },
       meta: {
         data: {
           message: "Enter correct e-mail, pls.",
@@ -87,22 +71,14 @@ export default async function handler(req, res) {
   }
 
   const clearHtml = sanitizeHtml(
-    "Email:" + req.body.Email.value + "<br/>" + req.body.letter
+    "Email:" + req.body.email + "<br/>" + req.body.letter
   );
   if (!clearHtml) {
     return res.status(500).json({
       id: new Date() + " clear info" + req.headers["x-forwarded-for"],
-      links: {
-        about: error.about,
-      },
       status: "500",
-      code: error.code,
       title: "Request failed",
       detail: "Entered information can be unsafe.",
-      source: {
-        pointer: error.pointer,
-        parametr: error.parametr,
-      },
       meta: {
         data: {
           message: "Enter safe information!",
@@ -142,5 +118,11 @@ export default async function handler(req, res) {
       },
     });
   }
-  return res.status(200).json({ message: "Mail sent!" });
+  return res.status(200).json({
+    meta: {
+      data: {
+        message: "Mail sent!",
+      },
+    },
+  });
 }
