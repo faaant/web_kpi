@@ -7,11 +7,12 @@ const rateLimit = require("lambda-rate-limiter")({
 }).check;
 
 export default async function handler(req, res) {
+  const clientIP = "x-forwarded-for";
   try {
-    await rateLimit(10, req.headers["x-forwarded-for"][0]);
+    await rateLimit(10, req.headers[clientIP][0]);
   } catch (error) {
     return res.json({
-      id: new Date() + " rate limit" + req.headers["x-forwarded-for"],
+      id: new Date() + " rate limit" + req.headers[clientIP][0],
       links: {
         about: error.about,
       },
@@ -43,9 +44,9 @@ export default async function handler(req, res) {
   for (let key in req.body) {
     if (!req.body[key]) {
       return res.json({
-        id: new Date() + " check not null" + req.headers["x-forwarded-for"],
+        id: new Date() + " check not null" + req.headers[clientIP][0],
         status: "500",
-        title: "Request failed",
+        title: "Request failed, NULL key",
         detail: "All keys must have not null values.",
         meta: {
           data: {
@@ -58,9 +59,9 @@ export default async function handler(req, res) {
 
   if (!isEmail(req.body.email)) {
     return res.status(500).json({
-      id: new Date() + " check mail" + req.headers["x-forwarded-for"],
+      id: new Date() + " check mail" + req.headers[clientIP][0],
       status: "500",
-      title: "Request failed",
+      title: "Request failed, bad email",
       detail: "User enetered uncorrect e-mail.",
       meta: {
         data: {
@@ -75,9 +76,9 @@ export default async function handler(req, res) {
   );
   if (!clearHtml) {
     return res.status(500).json({
-      id: new Date() + " clear info" + req.headers["x-forwarded-for"],
+      id: new Date() + " clear info" + req.headers[clientIP][0],
       status: "500",
-      title: "Request failed",
+      title: "Request failed, unsafe info",
       detail: "Entered information can be unsafe.",
       meta: {
         data: {
@@ -99,13 +100,13 @@ export default async function handler(req, res) {
     let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
     return res.json({
-      id: new Date() + " SMTPmailer" + req.headers["x-forwarded-for"],
+      id: new Date() + " SMTPmailer" + req.headers[clientIP][0],
       links: {
         about: error.about,
       },
       status: "500",
       code: error.code,
-      title: "Request failed",
+      title: "Request failed, mailer conncetion",
       detail: "Cant connect with mailer.",
       source: {
         pointer: error.pointer,
