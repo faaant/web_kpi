@@ -9,7 +9,7 @@ const rateLimit = require("lambda-rate-limiter")({
 export default async function handler(req, res) {
   const clientIP = "x-forwarded-for";
   try {
-    await rateLimit(10, req.headers[clientIP][0]);
+    await rateLimit(2, req.headers[clientIP][0]);
   } catch (error) {
     return res.json({
       id: new Date() + " rate limit" + req.headers[clientIP][0],
