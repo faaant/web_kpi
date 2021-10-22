@@ -1,0 +1,30 @@
+{
+  "name": "lab3",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "prettier": "prettier --check . --ignore-path .prettierignore",
+    "prettier:fix": "prettier --write . --ignore-path .prettierignore",
+    "slint": "stylelint \"**/*.scss\"",
+    "slint:fix": "stylelint \"**/*.scss\" --fix"
+  },
+  "dependencies": {
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "prettier": "2.4.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "sass": "^1.43.2"
+  }
+}
