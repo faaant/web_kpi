@@ -2,10 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Posts from "../components/posts";
-import { useState } from "react";
 
-export default function Home() {
-  let [posts, setPosts] = useState([]);
+Home.getInitialProps = async () => {
   async function fetchGraphQL(operationsDoc, operationName, variables) {
     const result = await fetch("https://weblab3.herokuapp.com/v1/graphql", {
       method: "POST",
@@ -22,8 +20,8 @@ export default function Home() {
   const operationsDoc = `
     query MyQuery {
       Posts {
-        Post
         Theme
+        Post
       }
     }
   `;
@@ -32,24 +30,14 @@ export default function Home() {
     return fetchGraphQL(operationsDoc, "MyQuery", {});
   }
 
-  function setter() {
-    setRefresh(true);
-  }
+  const response = await fetchMyQuery();
 
-  async function startFetchMyQuery() {
-    const { errors, data } = await fetchMyQuery();
+  return {
+    posts: response.data.Posts,
+  };
+};
 
-    if (errors) {
-      // handle those errors like a pro
-      console.error(errors);
-    }
-    // do something great with this precious data
-    if (posts.length == 0) {
-      setPosts(data.Posts);
-    }
-  }
-  startFetchMyQuery();
-
+export default function Home({ posts }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -60,17 +48,15 @@ export default function Home() {
       <header>
         <Image src="/Blog.jpg" alt="blog icon" width={300} height={80} />
       </header>
-
-      <main>
-        {/* <div>
-          Theme of post hello world   
-          <p>
-            hello lorem10 lorem10 lorem10 lorem10 lorem10 lorem1 0lorem 10 lorem10lorem10 hello lorem10 lorem10 lorem10 lorem10 lorem10 lorem1 0lorem 10 lorem10lorem10 hello lorem10 lorem10 lorem10 lorem10 lorem10 lorem1 0lorem 10 lorem10lorem10 hello lorem10 lorem10 lorem10 lorem10 lorem10 lorem1 0lorem 10 lorem10lorem10 
-          </p>
-        </div> */}
-        {<Posts posts={posts} />}
-      </main>
-
+      {posts.length ? (
+        <main>
+          <Posts posts={posts} />
+        </main>
+      ) : (
+        <div className={styles.loader}>
+          <img src="/loader.gif" alt="loader" />
+        </div>
+      )}
       <footer></footer>
     </div>
   );
