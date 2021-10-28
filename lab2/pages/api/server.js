@@ -7,12 +7,12 @@ const rateLimit = require("lambda-rate-limiter")({
 }).check;
 
 export default async function handler(req, res) {
-  const clientIP = "x-forwarded-for";
+  const clientIP = req.headers["x-forwarded-for"][0];
   try {
-    await rateLimit(2, req.headers[clientIP][0]);
+    await rateLimit(2, clientIP);
   } catch (error) {
     return res.json({
-      id: new Date() + " rate limit" + req.headers[clientIP][0],
+      id: new Date() + " rate limit" + clientIP,
       links: {
         about: error.about,
       },
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   }
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: process.env.HOST,
     port: 587,
     auth: {
       user: process.env.MAIL,
@@ -41,25 +41,23 @@ export default async function handler(req, res) {
     },
   });
 
-  for (let key in req.body) {
-    if (!req.body[key]) {
-      return res.json({
-        id: new Date() + " check not null" + req.headers[clientIP][0],
-        status: "500",
-        title: "Request failed, NULL key",
-        detail: "All keys must have not null values.",
-        meta: {
-          data: {
-            message: "No one field shouldn't be empty!",
-          },
+  if (Object.values(req.body).find((el) => el === null)) {
+    return res.json({
+      id: new Date() + " check not null" + clientIP,
+      status: "400",
+      title: "Request failed, NULL key",
+      detail: "All keys must have not null values.",
+      meta: {
+        data: {
+          message: "No one field shouldn't be empty!",
         },
-      });
-    }
+      },
+    });
   }
 
   if (!isEmail(req.body.email)) {
     return res.status(500).json({
-      id: new Date() + " check mail" + req.headers[clientIP][0],
+      id: new Date() + " check mail" + clientIP,
       status: "500",
       title: "Request failed, bad email",
       detail: "User enetered uncorrect e-mail.",
@@ -76,7 +74,7 @@ export default async function handler(req, res) {
   );
   if (!clearHtml) {
     return res.status(500).json({
-      id: new Date() + " clear info" + req.headers[clientIP][0],
+      id: new Date() + " clear info" + clientIP,
       status: "500",
       title: "Request failed, unsafe info",
       detail: "Entered information can be unsafe.",
@@ -96,11 +94,13 @@ export default async function handler(req, res) {
     html: clearHtml,
   };
 
+  console.log(bodyToSend);
+
   try {
     let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
     return res.json({
-      id: new Date() + " SMTPmailer" + req.headers[clientIP][0],
+      id: new Date() + " SMTPmailer" + clientIP,
       links: {
         about: error.about,
       },
