@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Posts from "../components/posts";
-import Form from "../components/form";
+import Form from "../components/Form";
 import { useState } from "react";
 
 export default function Home() {
