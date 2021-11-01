@@ -3,13 +3,12 @@ import Button from "./Button";
 import { useState } from "react";
 import Messager from "./Messager";
 
-export default function Form({ close, refresh }) {
+export default function Form({ close }) {
   let [spinnerVisibility, setSpinnerVisibility] = useState(false);
   let [message, setMessage] = useState("");
   let [disabled, setDisabled] = useState(false);
 
   function setter() {
-    refresh();
     setMessage("");
     setDisabled(false);
   }

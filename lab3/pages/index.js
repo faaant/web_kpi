@@ -4,10 +4,12 @@ import styles from "../styles/Home.module.scss";
 import Posts from "../components/posts";
 import Form from "../components/Form";
 import { useState } from "react";
+import { useSubscription } from "urql";
+import { useQuery } from "urql";
 
 export default function Home() {
   let [formVisibility, setFormVisibility] = useState(false);
-  let [posts, setPosts] = useState([]);
+  let [posts, setPosts] = useState({ Posts: [] });
 
   async function fetchGraphQL(operationsDoc, operationName, variables) {
     const result = await fetch("https://weblab3.herokuapp.com/v1/graphql", {
@@ -37,26 +39,31 @@ export default function Home() {
 
   async function startFetchMyQuery() {
     const { errors, data } = await fetchMyQuery();
-    if (posts.length != data.Posts.length) {
-      setPosts(data.Posts);
+    if (posts.Posts.length != data.Posts.length) {
+      setPosts(data);
     }
   }
   startFetchMyQuery();
 
-  function closeForm() {
+  const subscription = `
+    subscription {
+      Posts {
+        Theme
+        Post
+      }
+    }
+  `;
+  const [result] = useSubscription({ query: subscription });
+
+  const { data, fetching, error } = result;
+
+  async function closeForm() {
     setFormVisibility(false);
   }
 
-  async function refreshData() {
-    startFetchMyQuery();
-  }
   return (
     <>
-      {formVisibility === true ? (
-        <Form close={closeForm} refresh={refreshData} />
-      ) : (
-        <></>
-      )}
+      {formVisibility === true ? <Form close={closeForm} /> : <></>}
       <div className={styles.container}>
         <Head>
           <title>Blog</title>
@@ -69,9 +76,9 @@ export default function Home() {
             <div></div>
           </div>
         </header>
-        {posts.length ? (
+        {posts.Posts.length ? (
           <main>
-            <Posts posts={posts} />
+            <Posts posts={posts.Posts} />
           </main>
         ) : (
           <div className={styles.loader}>
