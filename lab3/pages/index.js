@@ -3,13 +3,14 @@ import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Posts from "../components/posts";
 import Form from "../components/Form";
+import Messager from "../components/Messager";
 import { useState } from "react";
 import { useSubscription } from "urql";
-import { useQuery } from "urql";
 
 export default function Home() {
   let [formVisibility, setFormVisibility] = useState(false);
   let [posts, setPosts] = useState({ Posts: [] });
+  let [message, setMessage] = useState("");
 
   async function fetchGraphQL(operationsDoc, operationName, variables) {
     const result = await fetch("https://weblab3.herokuapp.com/v1/graphql", {
@@ -56,13 +57,19 @@ export default function Home() {
   const [result] = useSubscription({ query: subscription });
 
   const { data, fetching, error } = result;
-
+  if (error) {
+    setMessage("Error with updating data");
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
+  }
   async function closeForm() {
     setFormVisibility(false);
   }
 
   return (
     <>
+      <Messager message="" />
       {formVisibility === true ? <Form close={closeForm} /> : <></>}
       <div className={styles.container}>
         <Head>
@@ -76,7 +83,7 @@ export default function Home() {
             <div></div>
           </div>
         </header>
-        {posts.Posts.length ? (
+        {posts.Posts.length && !fetching ? (
           <main>
             <Posts posts={posts.Posts} />
           </main>
