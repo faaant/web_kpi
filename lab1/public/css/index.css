@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  --p50: 50%;
+  --bg-color-white: white;
+  --bg-color-pink: rgb(247, 204, 204);
+  --bg-color-green: rgb(188, 218, 188);
+  --bg-color-blue: rgb(139, 205, 233);
+  --bg-color-red: rgb(236, 134, 134);
+  --text-padding: 10px;
+  --text-indent: 10px;
+}
+
+body {
+  display: grid;
+  width: 100%;
+  grid-template-rows: minmax(max-content, 15vh) minmax(auto, 85vh);
+}
+
+header {
+  display: grid;
+  grid-template-columns: minmax(auto, 50%) minmax(auto, 50%);
+  background-color: var(--bg-color-blue);
+}
+
+.centring {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: var(--text-padding);
+  max-width: 40vw;
+  word-wrap: break-word;
+}
+
+main aside > p {
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+.centring > p {
+  width: var(--p50);
+  background-color: var(--bg-color-white);
+  text-align: right;
+}
+
+.end-center {
+  padding-right: var(--text-padding);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.end-center > p {
+  text-align: right;
+  max-width: 40vw;
+  word-wrap: break-word;
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(80px, 20%) minmax(400px, 80%);
+  height: fit-content;
+}
+
+main aside {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--text-padding);
+  background-color: var(--bg-color-pink);
+}
+
+.right {
+  display: grid;
+  grid-template-rows: minmax(60vh, auto) minmax(max-content, 25vh);
+}
+
+.right > .up {
+  display: grid;
+  grid-template-columns: minmax(auto, 70%) minmax(auto, 30%);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color-white);
+}
+
+nav div {
+  max-width: 45vw;
+  word-wrap: break-word;
+}
+
+.right > .up > .right {
+  display: grid;
+  grid-template-rows: minmax(30vh, auto) minmax(30vh, auto);
+}
+
+.right > .up > .right > .up {
+  display: flex;
+  text-indent: var(--text-indent);
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg-color-pink);
+}
+
+.right > .up > .right > .up p {
+  max-width: 20vw;
+  word-wrap: break-word;
+}
+
+.right > .up > .right > .down {
+  display: flex;
+  text-indent: var(--text-indent);
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg-color-blue);
+}
+
+.right > .up > .right > .down p {
+  max-width: 20vw;
+  word-wrap: break-word;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: minmax(auto, 50%) minmax(auto, 50%);
+  background-color: var(--bg-color-green);
+}

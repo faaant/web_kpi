@@ -4,3 +4,4 @@
 npm run lint --workspace=lab4
 npm run prettier --workspace=lab4
 npm run slint --workspace=lab4
+

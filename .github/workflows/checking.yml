@@ -10,3 +10,4 @@ jobs:
       - name: Check folder Lab4
         working-directory: lab4
         run: npm ci && npm run prettier && npm run slint
+
