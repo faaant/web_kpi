@@ -1,0 +1,12 @@
+name: Format check
+on: [pull_request]
+jobs:
+  build_and_preview_lab4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          cache: "npm"
+      - name: Check folder Lab4
+        working-directory: lab4
+        run: npm ci && npm run prettier && npm run slint
