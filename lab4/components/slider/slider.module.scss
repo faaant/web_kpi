@@ -66,6 +66,10 @@
         display: inline-block;
         height: 10%;
         width: 6%;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -80,10 +84,13 @@
     z-index: 1;
 
     &:hover {
-      cursor: pointer;
       display: block;
       opacity: 0.4;
       transition: 0.5s;
+
+      label {
+        cursor: pointer;
+      }
     }
 
     label {
@@ -104,10 +111,13 @@
     z-index: 1;
 
     &:hover {
-      cursor: pointer;
       display: block;
       opacity: 0.4;
       transition: 0.5s;
+
+      label {
+        cursor: pointer;
+      }
     }
 
     label {
