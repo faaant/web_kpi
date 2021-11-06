@@ -52,20 +52,22 @@
 
   .dots {
     bottom: 0;
-    height: 10%;
+    display: flex;
+    height: 4%;
+    justify-content: center;
     position: absolute;
     text-align: center;
     width: 100%;
     z-index: 1;
 
     label {
-      padding: 0 10px;
+      padding: 0 7px;
 
       .dot {
         background-color: var(--bg-light-brown);
-        display: inline-block;
-        height: 10%;
-        width: 6%;
+
+        height: 20%;
+        width: 4vw;
 
         &:hover {
           cursor: pointer;
