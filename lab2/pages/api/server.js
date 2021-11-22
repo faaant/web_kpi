@@ -96,8 +96,6 @@ export default async function handler(req, res) {
     html: clearHtml,
   };
 
-  console.log(bodyToSend);
-
   try {
     let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
