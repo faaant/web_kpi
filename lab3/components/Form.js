@@ -33,17 +33,14 @@ export default function Form({ close }) {
       .then((data) => {
         setMessage(data.meta.data.message);
         async function fetchGraphQL(operationsDoc, operationName, variables) {
-          const result = await fetch(
-            "https://weblab3.herokuapp.com/v1/graphql",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                query: operationsDoc,
-                variables: variables,
-                operationName: operationName,
-              }),
-            }
-          );
+          const result = await fetch(process.env.HEROKU, {
+            method: "POST",
+            body: JSON.stringify({
+              query: operationsDoc,
+              variables: variables,
+              operationName: operationName,
+            }),
+          });
 
           return await result.json();
         }

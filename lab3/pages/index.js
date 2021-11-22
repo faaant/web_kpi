@@ -9,42 +9,7 @@ import { useSubscription } from "urql";
 
 export default function Home() {
   let [formVisibility, setFormVisibility] = useState(false);
-  let [posts, setPosts] = useState({ Posts: [] });
   let [message, setMessage] = useState("");
-
-  async function fetchGraphQL(operationsDoc, operationName, variables) {
-    const result = await fetch("https://weblab3.herokuapp.com/v1/graphql", {
-      method: "POST",
-      body: JSON.stringify({
-        query: operationsDoc,
-        variables: variables,
-        operationName: operationName,
-      }),
-    });
-
-    return await result.json();
-  }
-
-  const operationsDoc = `
-    query MyQuery {
-      Posts {
-        Post
-        Theme
-      }
-    }
-  `;
-
-  function fetchMyQuery() {
-    return fetchGraphQL(operationsDoc, "MyQuery", {});
-  }
-
-  async function startFetchMyQuery() {
-    const { errors, data } = await fetchMyQuery();
-    if (posts.Posts.length != data.Posts.length) {
-      setPosts(data);
-    }
-  }
-  startFetchMyQuery();
 
   const subscription = `
     subscription {
@@ -83,9 +48,9 @@ export default function Home() {
             <div></div>
           </div>
         </header>
-        {posts.Posts.length && !fetching ? (
+        {!fetching ? (
           <main>
-            <Posts posts={posts.Posts} />
+            <Posts posts={data.Posts} />
           </main>
         ) : (
           <div className={styles.loader}>
