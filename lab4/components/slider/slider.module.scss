@@ -15,16 +15,23 @@
 #tab2:checked ~ .slider .dots label [data-name='tab2'],
 #tab3:checked ~ .slider .dots label [data-name='tab3'] {
   background-color: var(--bg-green);
-  transition: 0.8s;
+  transition: 0.3s;
 }
 
-#tab1:checked ~ .slider .to-left label:nth-child(3),
-#tab1:checked ~ .slider .to-right label:nth-child(2),
-#tab2:checked ~ .slider .to-left label:nth-child(1),
-#tab2:checked ~ .slider .to-right label:nth-child(3),
-#tab3:checked ~ .slider .to-left label:nth-child(2),
-#tab3:checked ~ .slider .to-right label:nth-child(1) {
-  display: block;
+$slides: (
+  '#tab1':(('left':3),('right':2)),
+  '#tab2':(('left':1),('right':3)),
+  '#tab3':(('left':2),('right':1)),
+);
+
+@each $slide, $value in $slides{
+  @each $subvalue in $value{
+    @each $control, $child in $subvalue{
+      #{$slide}:checked ~ .slider .to-#{$control} label:nth-child(#{$child}){
+        display: block;
+      }
+    }
+  }
 }
 
 .slider {
