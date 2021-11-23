@@ -4,13 +4,13 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 var WebSocketClient = require("websocket").client;
 
 const subscriptionClient = new SubscriptionClient(
-  "wss://weblab3.herokuapp.com/v1/graphql",
+  process.env.HEROKUWS,
   { reconnect: true },
   WebSocketClient
 );
 
 const client = new Client({
-  url: "https://weblab3.herokuapp.com/v1/graphql",
+  url: process.env.HEROKU,
   exchanges: [
     ...defaultExchanges,
     subscriptionExchange({

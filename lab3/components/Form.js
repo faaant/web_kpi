@@ -32,7 +32,6 @@ export default function Form({ close }) {
       })
       .then((data) => {
         setMessage(data.meta.data.message);
-        console.log(process.env.HEROKU);
         async function fetchGraphQL(operationsDoc, operationName, variables) {
           const result = await fetch(process.env.HEROKU, {
             method: "POST",
