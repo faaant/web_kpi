@@ -28,21 +28,47 @@ export default function Form({ close }) {
       body: JSON.stringify(bodyToSend),
     })
       .then((resp) => {
-        return resp.json();
+        try {
+          return resp.json();
+        } catch (error) {
+          return;
+        }
       })
       .then((data) => {
-        setMessage(data.meta.data.message);
+        if (data.meta.data?.message && !data?.status) {
+          setMessage(data.meta.data.message);
+        } else {
+          setSpinnerVisibility(false);
+          setDisabled(true);
+          if (data.meta.data?.message) {
+            setMessage(data.meta.data.message);
+          } else {
+            setMessage("Something go wrong!");
+          }
+          return;
+        }
         async function fetchGraphQL(operationsDoc, operationName, variables) {
           const result = await fetch(process.env.HEROKU, {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
               query: operationsDoc,
               variables: variables,
               operationName: operationName,
             }),
+          }).catch((err) => {
+            setSpinnerVisibility(false);
+            setDisabled(true);
+            setMessage("Error with request!");
           });
 
-          return await result.json();
+          try {
+            return await result.json();
+          } catch (error) {
+            return error;
+          }
         }
 
         const operationsDoc = `
@@ -63,12 +89,13 @@ export default function Form({ close }) {
         startExecuteMyMutation();
         setSpinnerVisibility(false);
         setDisabled(true);
-        setTimeout(setter, 2000);
       })
-      .catch((e) => {
-        setTimeout(setter, 2000);
+      .catch(() => {
         setSpinnerVisibility(false);
+        setDisabled(true);
+        setMessage("Error with adding info!");
       });
+    setTimeout(setter, 2000);
   }
 
   return (
