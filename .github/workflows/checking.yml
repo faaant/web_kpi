@@ -7,13 +7,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           cache: "npm"
-      - name: Check folder Lab1
+      - name: CI
+        run: npm ci
+      - name: Checks
         working-directory: web_kpi
-        run: |
-          npm ci  
-          npm run prettier --workspaces --if-present
-          npm run lint --workspaces --if-present
-          npm run slint --workspaces --if-present
+        run: npm run prettier --workspaces --if-present && npm run lint --workspaces --if-present && npm run slint --workspaces --if-present
   # build_and_preview_lab1:
   #   runs-on: ubuntu-latest
   #   steps:
