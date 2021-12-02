@@ -1,12 +1,14 @@
 name: Format check
 on: [pull_request]
 jobs:
-  build_and_preview_lab:
+  build_and_preview_lab1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           cache: "npm"
+      - name: Check folder Lab1
+        working-directory: web_kpi
         run: |
           npm ci  
           npm run prettier --workspaces --if-present
