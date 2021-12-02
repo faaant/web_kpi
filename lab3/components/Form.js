@@ -24,29 +24,22 @@ export default function Form({ close }) {
         variables: variables,
         operationName: operationName,
       }),
-    }).catch((err) => {
-      setSpinnerVisibility(false);
-      setDisabled(true);
-      setMessage("Error with request!");
     });
-
-    try {
-      return await result.json();
-    } catch (error) {
-      return error;
-    }
+    return await result.json();
   }
 
   function executeMyMutation(operationsDoc) {
-    try {
-      return fetchGraphQL(operationsDoc, "MyMutation", {});
-    } catch (error) {
-      return error;
-    }
+    return fetchGraphQL(operationsDoc, "MyMutation", {});
   }
 
   async function startExecuteMyMutation(operationsDoc) {
-    const { errors, data } = await executeMyMutation(operationsDoc);
+    try {
+      await executeMyMutation(operationsDoc);
+    } catch (error) {
+      setSpinnerVisibility(false);
+      setDisabled(true);
+      setMessage("Error with request!");
+    }
   }
 
   function prevent(e) {
