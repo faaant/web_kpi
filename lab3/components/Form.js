@@ -13,6 +13,42 @@ export default function Form({ close }) {
     setDisabled(false);
   }
 
+  async function fetchGraphQL(operationsDoc, operationName, variables) {
+    const result = await fetch(process.env.HEROKU, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: operationsDoc,
+        variables: variables,
+        operationName: operationName,
+      }),
+    }).catch((err) => {
+      setSpinnerVisibility(false);
+      setDisabled(true);
+      setMessage("Error with request!");
+    });
+
+    try {
+      return await result.json();
+    } catch (error) {
+      return error;
+    }
+  }
+
+  function executeMyMutation(operationsDoc) {
+    try {
+      return fetchGraphQL(operationsDoc, "MyMutation", {});
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function startExecuteMyMutation(operationsDoc) {
+    const { errors, data } = await executeMyMutation(operationsDoc);
+  }
+
   function prevent(e) {
     e.preventDefault();
     setSpinnerVisibility(true);
@@ -31,7 +67,7 @@ export default function Form({ close }) {
         try {
           return resp.json();
         } catch (error) {
-          return;
+          return error;
         }
       })
       .then((data) => {
@@ -47,46 +83,16 @@ export default function Form({ close }) {
           }
           return;
         }
-        async function fetchGraphQL(operationsDoc, operationName, variables) {
-          const result = await fetch(process.env.HEROKU, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              query: operationsDoc,
-              variables: variables,
-              operationName: operationName,
-            }),
-          }).catch((err) => {
-            setSpinnerVisibility(false);
-            setDisabled(true);
-            setMessage("Error with request!");
-          });
-
-          try {
-            return await result.json();
-          } catch (error) {
-            return error;
-          }
-        }
 
         const operationsDoc = `
-            mutation MyMutation {
-              insert_Posts_one(object: {Post: "${data.meta.data.article.post}", Theme: "${data.meta.data.article.theme}"}) {
-                ID
-              }
+          mutation MyMutation {
+            insert_Posts_one(object: {Post: "${data.meta.data.article.post}", Theme: "${data.meta.data.article.theme}"}) {
+              ID
             }
-          `;
+          }
+        `;
 
-        function executeMyMutation() {
-          return fetchGraphQL(operationsDoc, "MyMutation", {});
-        }
-
-        async function startExecuteMyMutation() {
-          const { errors, data } = await executeMyMutation();
-        }
-        startExecuteMyMutation();
+        startExecuteMyMutation(operationsDoc);
         setSpinnerVisibility(false);
         setDisabled(true);
       })
@@ -94,8 +100,10 @@ export default function Form({ close }) {
         setSpinnerVisibility(false);
         setDisabled(true);
         setMessage("Error with adding info!");
+      })
+      .then(() => {
+        setTimeout(setter, 2000);
       });
-    setTimeout(setter, 2000);
   }
 
   return (
