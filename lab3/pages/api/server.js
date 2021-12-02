@@ -32,6 +32,23 @@ export default async function handler(req, res) {
     });
   }
 
+  //iterating object
+  for (let key in req.body) {
+    if (req.body[key] === null) {
+      return res.json({
+        id: new Date() + " check not null" + clientIP,
+        status: "400",
+        title: "Request failed, NULL key",
+        detail: "All keys must have not null values.",
+        meta: {
+          data: {
+            message: "No one field shouldn't be empty!",
+          },
+        },
+      });
+    }
+  }
+
   return res.status(200).json({
     meta: {
       data: {
