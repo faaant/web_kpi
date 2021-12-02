@@ -7,29 +7,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           cache: "npm"
-      - name: CI
-        run: npm ci
-      - name: Checks
-        working-directory: web_kpi
-        run: npm run prettier --workspaces --if-present && npm run lint --workspaces --if-present && npm run slint --workspaces --if-present
-  # build_and_preview_lab1:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         cache: "npm"
-  #     - name: Check folder Lab1
-  #       working-directory: lab1
-  #       run: npm ci && npm run prettier && npm run lint && npm run slint
-  # build_and_preview_lab2:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         cache: "npm"
-  #     - name: Check folder Lab2
-  #       working-directory: lab2
-  #       run: npm ci && npm run prettier && npm run lint && npm run slint
-  #       env: 
-  #         MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-  #         MAIL: ${{ secrets.MAIL }}
+      - name: Check folder Lab1
+        working-directory: lab1
+        run: npm ci && npm run prettier && npm run lint && npm run slint
+  build_and_preview_lab2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          cache: "npm"
+      - name: Check folder Lab2
+        working-directory: lab2
+        run: npm ci && npm run prettier && npm run lint && npm run slint
+        env: 
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL: ${{ secrets.MAIL }}
