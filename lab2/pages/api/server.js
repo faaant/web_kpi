@@ -43,24 +43,26 @@ export default async function handler(req, res) {
     },
   });
 
-  if (Object.values(req.body).find((el) => el === null)) {
-    return res.json({
-      id: new Date() + " check not null" + clientIP,
-      status: "400",
-      title: "Request failed, NULL key",
-      detail: "All keys must have not null values.",
-      meta: {
-        data: {
-          message: "No one field shouldn't be empty!",
+  for (let key in req.body) {
+    if (req.body[key] === null) {
+      return res.json({
+        id: new Date() + " check not null" + clientIP,
+        status: "400",
+        title: "Request failed, NULL key",
+        detail: "All keys must have not null values.",
+        meta: {
+          data: {
+            message: "No one field shouldn't be empty!",
+          },
         },
-      },
-    });
+      });
+    }
   }
 
   if (!isEmail(req.body.email)) {
-    return res.status(500).json({
+    return res.json({
       id: new Date() + " check mail" + clientIP,
-      status: "500",
+      status: "400",
       title: "Request failed, bad email",
       detail: "User enetered uncorrect e-mail.",
       meta: {
@@ -75,9 +77,9 @@ export default async function handler(req, res) {
     "Email:" + req.body.email + "<br/>" + req.body.letter
   );
   if (!clearHtml) {
-    return res.status(500).json({
+    return res.json({
       id: new Date() + " clear info" + clientIP,
-      status: "500",
+      status: "400",
       title: "Request failed, unsafe info",
       detail: "Entered information can be unsafe.",
       meta: {
@@ -109,6 +111,7 @@ export default async function handler(req, res) {
       title: "Request failed, mailer conncetion",
       detail: "Cant connect with mailer.",
       source: {
+        error: error,
         pointer: error.pointer,
         parametr: error.parametr,
       },

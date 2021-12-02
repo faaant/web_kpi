@@ -24,8 +24,8 @@ export default function Home() {
     if (checkInfo(e.target.Email.value)) {
       setSpinnerVisibility(true);
       const bodyToSend = {
-        email: e.target.Email.value,
-        letter: e.target.letterValue.value,
+        email: e.target.elements.Email.value,
+        letter: e.target.elements.letterValue.value,
       };
       fetch("/api/server", {
         method: "POST",
