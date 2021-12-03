@@ -1,9 +1,9 @@
 .container {
-  height: 100vh;
+  height: 100%;
   left: 0;
   position: absolute;
   top: 0;
-  width: 100vw;
+  width: 100%;
 
   #checker {
     display: none;
@@ -54,6 +54,8 @@
   }
 
   #checker:checked ~ label .burger {
+    position: fixed;
+
     &::before {
       border-radius: 50px;
       content: '';
