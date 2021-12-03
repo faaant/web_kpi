@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   try {
     await rateLimit(2, clientIP);
   } catch (error) {
-    return res.json({
+    return res.status(429).json({
       id: new Date() + " rate limit" + clientIP,
       links: {
         about: error.about,
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
   for (let key in req.body) {
     if (req.body[key] === null) {
-      return res.json({
+      return res.status(400).json({
         id: new Date() + " check not null" + clientIP,
         status: "400",
         title: "Request failed, NULL key",
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
   }
 
   if (!isEmail(req.body.email)) {
-    return res.json({
+    return res.status(400).json({
       id: new Date() + " check mail" + clientIP,
       status: "400",
       title: "Request failed, bad email",
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
     "Email:" + req.body.email + "<br/>" + req.body.letter
   );
   if (!clearHtml) {
-    return res.json({
+    return res.status(400).json({
       id: new Date() + " clear info" + clientIP,
       status: "400",
       title: "Request failed, unsafe info",
@@ -101,7 +101,7 @@ export default async function handler(req, res) {
   try {
     let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       id: new Date() + " SMTPmailer" + clientIP,
       links: {
         about: error.about,
