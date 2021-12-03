@@ -14,17 +14,8 @@ export default async function handler(req, res) {
     await rateLimit(2, clientIP);
   } catch (error) {
     return res.status(429).json({
-      id: new Date() + " rate limit" + clientIP,
-      links: {
-        about: error.about,
-      },
-      status: "429",
-      code: error.code,
-      title: "Too many requests",
-      detail: "Human reached current rate limit.",
       source: {
-        pointer: error.pointer,
-        parametr: error.parametr,
+        error: error,
       },
       meta: {
         data: {
@@ -46,10 +37,6 @@ export default async function handler(req, res) {
   for (let key in req.body) {
     if (req.body[key] === null) {
       return res.status(400).json({
-        id: new Date() + " check not null" + clientIP,
-        status: "400",
-        title: "Request failed, NULL key",
-        detail: "All keys must have not null values.",
         meta: {
           data: {
             message: "No one field shouldn't be empty!",
@@ -61,10 +48,6 @@ export default async function handler(req, res) {
 
   if (!isEmail(req.body.email)) {
     return res.status(400).json({
-      id: new Date() + " check mail" + clientIP,
-      status: "400",
-      title: "Request failed, bad email",
-      detail: "User enetered uncorrect e-mail.",
       meta: {
         data: {
           message: "Enter correct e-mail, pls.",
@@ -78,10 +61,6 @@ export default async function handler(req, res) {
   );
   if (!clearHtml) {
     return res.status(400).json({
-      id: new Date() + " clear info" + clientIP,
-      status: "400",
-      title: "Request failed, unsafe info",
-      detail: "Entered information can be unsafe.",
       meta: {
         data: {
           message: "Enter safe information!",
@@ -102,18 +81,8 @@ export default async function handler(req, res) {
     let info = await transporter.sendMail(bodyToSend);
   } catch (error) {
     return res.status(500).json({
-      id: new Date() + " SMTPmailer" + clientIP,
-      links: {
-        about: error.about,
-      },
-      status: "500",
-      code: error.code,
-      title: "Request failed, mailer conncetion",
-      detail: "Cant connect with mailer.",
       source: {
         error: error,
-        pointer: error.pointer,
-        parametr: error.parametr,
       },
       meta: {
         data: {

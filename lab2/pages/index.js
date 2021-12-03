@@ -45,8 +45,9 @@ export default function Home() {
         })
         .catch((e) => {
           setSpinnerVisibility(false);
-          setMessage("");
-          setDisabled(false);
+          setMessage("Smth going wrong!");
+          setDisabled(true);
+          setTimeout(setter, 2000);
         });
     }
   }
