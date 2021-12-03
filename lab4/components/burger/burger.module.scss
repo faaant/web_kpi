@@ -54,8 +54,6 @@
   }
 
   #checker:checked ~ label .burger {
-    position: fixed;
-
     &::before {
       border-radius: 50px;
       content: '';
