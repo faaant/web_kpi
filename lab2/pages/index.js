@@ -51,7 +51,7 @@ export default function Home() {
           setDisabled(true);
         })
         .catch((e) => {
-          setMessage("Smth going wrong!");
+          setMessage("Something went wrong!");
           setSpinnerVisibility(false);
           setDisabled(true);
         })
