@@ -11,19 +11,11 @@ export default async function handler(req, res) {
   try {
     await rateLimit(2, clientIP);
   } catch (error) {
-    return res.json({
-      id: new Date() + " rate limit" + clientIP,
-      links: {
-        about: error.about,
+    return res.status(429).json({
+      source: {
+        error: error,
       },
       status: "429",
-      code: error.code,
-      title: "Too many requests",
-      detail: "Human reached current rate limit.",
-      source: {
-        pointer: error.pointer,
-        parametr: error.parametr,
-      },
       meta: {
         data: {
           message: "Too many requests!",
@@ -35,11 +27,8 @@ export default async function handler(req, res) {
   //iterating object
   for (let key in req.body) {
     if (req.body[key] === null) {
-      return res.json({
-        id: new Date() + " check not null" + clientIP,
+      return res.status(400).json({
         status: "400",
-        title: "Request failed, NULL key",
-        detail: "All keys must have not null values.",
         meta: {
           data: {
             message: "No one field shouldn't be empty!",
