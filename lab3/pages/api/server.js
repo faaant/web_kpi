@@ -25,17 +25,15 @@ export default async function handler(req, res) {
   }
 
   //iterating object
-  for (let key in req.body) {
-    if (req.body[key] === null) {
-      return res.status(400).json({
-        status: "400",
-        meta: {
-          data: {
-            message: "No one field shouldn't be empty!",
-          },
+  if (Array.from(req.body).some((el) => el === null)) {
+    return res.status(400).json({
+      status: "400",
+      meta: {
+        data: {
+          message: "No one field shouldn't be empty!",
         },
-      });
-    }
+      },
+    });
   }
 
   return res.status(200).json({
