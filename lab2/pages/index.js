@@ -35,18 +35,27 @@ export default function Home() {
         body: JSON.stringify(bodyToSend),
       })
         .then((resp) => {
-          return resp.json();
+          try {
+            return resp.json();
+          } catch (error) {
+            return error;
+          }
         })
         .then((data) => {
-          setMessage(data.meta.data.message);
+          if (data.meta.data?.message) {
+            setMessage(data.meta.data.message);
+          } else {
+            setMessage("An error may have occurred.");
+          }
           setSpinnerVisibility(false);
           setDisabled(true);
-          setTimeout(setter, 2000);
         })
         .catch((e) => {
-          setSpinnerVisibility(false);
           setMessage("Smth going wrong!");
+          setSpinnerVisibility(false);
           setDisabled(true);
+        })
+        .then(() => {
           setTimeout(setter, 2000);
         });
     }
