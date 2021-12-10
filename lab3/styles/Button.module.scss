@@ -1,0 +1,23 @@
+.left {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  width: 100%;
+
+  img {
+    height: 250%;
+  }
+
+  [type='submit'] {
+    background-color: transparent;
+    border: dashed #688d92 1px;
+    height: 80%;
+    outline: none;
+    width: 50%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

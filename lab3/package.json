@@ -1,0 +1,38 @@
+{
+  "name": "lab3",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+    "prettier": "prettier --check . --ignore-path .prettierignore",
+    "prettier:fix": "prettier --write . --ignore-path .prettierignore",
+    "slint": "stylelint \"**/*.scss\"",
+    "slint:fix": "stylelint \"**/*.scss\" --fix"
+  },
+  "dependencies": {
+    "graphql": "^15.7.2",
+    "lambda-rate-limiter": "^3.0.1",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sanitize-html": "^2.5.2",
+    "subscriptions-transport-ws": "^0.9.19",
+    "urql": "^2.0.5",
+    "websocket": "^1.0.34"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "prettier": "2.4.1",
+    "sass": "^1.43.2",
+    "stylelint": "^14.0.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^23.0.0",
+    "stylelint-config-standard-scss": "^2.0.0"
+  }
+}
