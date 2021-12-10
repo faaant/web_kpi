@@ -35,8 +35,9 @@ export default function Form({ close }) {
   async function startExecuteMyMutation(operationsDoc) {
     try {
       await executeMyMutation(operationsDoc);
-      setMessage("Added!");
     } catch (error) {
+      setSpinnerVisibility(false);
+      setDisabled(true);
       setMessage("Error with request!");
     }
   }
