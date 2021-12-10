@@ -35,11 +35,7 @@ export default function Home() {
         body: JSON.stringify(bodyToSend),
       })
         .then((resp) => {
-          try {
-            return resp.json();
-          } catch (error) {
-            return error;
-          }
+          return resp.json();
         })
         .then((data) => {
           if (data.meta.data?.message) {
