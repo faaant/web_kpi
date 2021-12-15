@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     (req.headers["x-forwarded-for"] || "").split(",")?.pop()?.trim() ||
     req.socket.remoteAddress;
   try {
-    await rateLimit(2, clientIP);
+    await rateLimit(1, clientIP);
   } catch (error) {
     return res.status(429).json({
       source: {
