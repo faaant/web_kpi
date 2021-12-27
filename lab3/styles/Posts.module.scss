@@ -1,0 +1,15 @@
+.post-container {
+  position: relative;
+
+  .delete {
+    background-color: var(--tomato-background);
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    height: 30px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: 30px;
+  }
+}

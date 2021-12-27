@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
-import Posts from "../components/posts";
+import Posts from "../components/Posts";
 import Form from "../components/Form";
 import Messager from "../components/Messager";
+import { startExecuteMyMutation } from "../requests/mutation";
 import { useState } from "react";
 import { useSubscription } from "urql";
 
@@ -32,9 +33,35 @@ export default function Home() {
     setFormVisibility(false);
   }
 
+  function setter() {
+    setMessage("");
+  }
+
+  async function deletePost(e) {
+    if (e.target.parentNode.children[1]?.innerHTML) {
+      const operationsDoc = `
+        mutation MyMutation {
+          delete_Posts(where: {Theme: {_eq: "${e.target.parentNode.childNodes[1].innerHTML}"}}){
+            affected_rows
+          }
+        }
+      `;
+      startExecuteMyMutation(operationsDoc)
+        .then(() => {
+          setMessage("Deleted!");
+        })
+        .catch(() => {
+          setMessage("Error with request!");
+        })
+        .then(() => {
+          setTimeout(setter, 2000);
+        });
+    }
+  }
+
   return (
     <>
-      <Messager message="" />
+      <Messager message={message} />
       {formVisibility === true ? <Form close={closeForm} /> : <></>}
       <div className={styles.container}>
         <Head>
@@ -50,7 +77,7 @@ export default function Home() {
         </header>
         {!fetching ? (
           <main>
-            <Posts posts={data.Posts} />
+            <Posts posts={data.Posts} deletePost={deletePost} />
           </main>
         ) : (
           <div className={styles.loader}>

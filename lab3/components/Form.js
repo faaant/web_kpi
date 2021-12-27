@@ -2,6 +2,7 @@ import styles from "../styles/form.module.scss";
 import Button from "./Button";
 import { useState } from "react";
 import Messager from "./Messager";
+import { startExecuteMyMutation } from "../requests/mutation";
 
 export default function Form({ close }) {
   let [spinnerVisibility, setSpinnerVisibility] = useState(false);
@@ -11,35 +12,6 @@ export default function Form({ close }) {
   function setter() {
     setMessage("");
     setDisabled(false);
-  }
-
-  async function fetchGraphQL(operationsDoc, operationName, variables) {
-    const result = await fetch(process.env.HEROKU, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: operationsDoc,
-        variables: variables,
-        operationName: operationName,
-      }),
-    });
-    return result.json();
-  }
-
-  function executeMyMutation(operationsDoc) {
-    return fetchGraphQL(operationsDoc, "MyMutation", {});
-  }
-
-  async function startExecuteMyMutation(operationsDoc) {
-    return executeMyMutation(operationsDoc)
-      .then(() => {
-        setMessage("Added!");
-      })
-      .catch(() => {
-        setMessage("Error with request!");
-      });
   }
 
   function prevent(e) {
@@ -72,7 +44,13 @@ export default function Form({ close }) {
             }
           }
         `;
-        startExecuteMyMutation(operationsDoc);
+        startExecuteMyMutation(operationsDoc)
+          .then(() => {
+            setMessage("Added!");
+          })
+          .catch(() => {
+            setMessage("Error with request!");
+          });
       })
       .catch(() => {
         setMessage("Error with adding info!");
