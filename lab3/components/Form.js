@@ -25,7 +25,7 @@ export default function Form({ close }) {
         operationName: operationName,
       }),
     });
-    return await result.json();
+    return result.json();
   }
 
   function executeMyMutation(operationsDoc) {
