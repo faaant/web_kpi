@@ -6,6 +6,15 @@ const rateLimit = require("lambda-rate-limiter")({
   interval: 60 * 1000,
 }).check;
 
+const transporter = nodemailer.createTransport({
+  host: process.env.HOST,
+  port: 587,
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
+
 export default async function handler(req, res) {
   const clientIP =
     (req.headers["x-forwarded-for"] || "").split(",")?.pop()?.trim() ||
@@ -24,15 +33,6 @@ export default async function handler(req, res) {
       },
     });
   }
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.HOST,
-    port: 587,
-    auth: {
-      user: process.env.MAIL,
-      pass: process.env.MAIL_PASSWORD,
-    },
-  });
 
   if (Array.from(req.body).some((el) => el === null)) {
     return res.status(400).json({
