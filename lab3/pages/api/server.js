@@ -1,5 +1,3 @@
-import sanitizeHtml from "sanitize-html";
-
 const rateLimit = require("lambda-rate-limiter")({
   interval: 60 * 1000,
 }).check;

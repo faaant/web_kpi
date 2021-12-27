@@ -33,12 +33,13 @@ export default function Form({ close }) {
   }
 
   async function startExecuteMyMutation(operationsDoc) {
-    try {
-      await executeMyMutation(operationsDoc);
-      setMessage("Added!");
-    } catch (error) {
-      setMessage("Error with request!");
-    }
+    return executeMyMutation(operationsDoc)
+      .then(() => {
+        setMessage("Added!");
+      })
+      .catch(() => {
+        setMessage("Error with request!");
+      });
   }
 
   function prevent(e) {
@@ -60,8 +61,6 @@ export default function Form({ close }) {
       })
       .then((data) => {
         if (data.meta.data?.message) {
-          setSpinnerVisibility(false);
-          setDisabled(true);
           setMessage(data.meta.data.message);
           return;
         }
@@ -73,17 +72,14 @@ export default function Form({ close }) {
             }
           }
         `;
-
         startExecuteMyMutation(operationsDoc);
-        setSpinnerVisibility(false);
-        setDisabled(true);
       })
       .catch(() => {
-        setSpinnerVisibility(false);
-        setDisabled(true);
         setMessage("Error with adding info!");
       })
       .then(() => {
+        setSpinnerVisibility(false);
+        setDisabled(true);
         setTimeout(setter, 2000);
       });
   }
