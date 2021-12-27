@@ -76,25 +76,27 @@ export default async function handler(req, res) {
     html: clearHtml,
   };
 
-  try {
-    let info = await transporter.sendMail(bodyToSend);
-  } catch (error) {
-    return res.status(500).json({
-      source: {
-        error: error,
-      },
-      meta: {
-        data: {
-          message: "Connect to mailer failed!",
+  transporter
+    .sendMail(bodyToSend)
+    .then(() => {
+      return res.status(200).json({
+        meta: {
+          data: {
+            message: "Mail sent!",
+          },
         },
-      },
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        source: {
+          error: error,
+        },
+        meta: {
+          data: {
+            message: "Connect to mailer failed!",
+          },
+        },
+      });
     });
-  }
-  return res.status(200).json({
-    meta: {
-      data: {
-        message: "Mail sent!",
-      },
-    },
-  });
 }
