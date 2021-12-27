@@ -24,8 +24,8 @@ export default function Home() {
     if (checkInfo(e.target.Email.value)) {
       setSpinnerVisibility(true);
       const bodyToSend = {
-        email: e.target.elements.Email.value,
-        letter: e.target.elements.letterValue.value,
+        email: e.target.elements.Email?.value,
+        letter: e.target.elements.letterValue?.value,
       };
       fetch("/api/server", {
         method: "POST",
@@ -38,11 +38,7 @@ export default function Home() {
           return resp.json();
         })
         .then((data) => {
-          if (data.meta.data?.message) {
-            setMessage(data.meta.data.message);
-          } else {
-            setMessage("An error may have occurred.");
-          }
+          setMessage(data.meta.data?.message ?? "An error may have occurred");
           setSpinnerVisibility(false);
           setDisabled(true);
         })
