@@ -10,7 +10,13 @@ export default function Burger() {
       <label htmlFor={styles.checker}>
         <div className={styles["close-area"]}></div>
       </label>
-      <div className={styles.menu}></div>
+      <div className={styles.menu}>
+        <div className={`${styles.tab + " " + styles["top-distance"]}`}>
+          Menu
+        </div>
+        <div className={styles.tab}>Start</div>
+        <div className={styles.tab}>TODO</div>
+      </div>
     </div>
   );
 }

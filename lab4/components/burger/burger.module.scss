@@ -82,6 +82,7 @@
   .menu {
     background-color: var(--bg-light-silver);
     border: transparent;
+    font-size: 0;
     height: 100%;
     position: fixed;
     right: 0;
@@ -89,10 +90,30 @@
     transition: 1s;
     width: 0;
     z-index: 3;
+
+    .tab {
+      align-items: center;
+      border-bottom: solid var(--bg-silver) 1px;
+      display: flex;
+      height: 80px;
+      justify-content: center;
+      width: 100%;
+
+      &:hover {
+        background-color: var(--bg-lighter-silver);
+        cursor: pointer;
+      }
+    }
+
+    .top-distance{
+      border-top: solid var(--bg-silver) 1px;
+      margin-top: 40px;
+    }
   }
 
   #checker:checked ~ .menu {
     border-left: var(--silver-border-1px);
+    font-size: 20px;
     height: 100%;
     min-width: 50px;
     position: fixed;
