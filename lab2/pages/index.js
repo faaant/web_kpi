@@ -39,16 +39,14 @@ export default function Home() {
         })
         .then((data) => {
           setMessage(data.meta.data?.message ?? "An error may have occurred");
-          setSpinnerVisibility(false);
-          setDisabled(true);
         })
         .catch((e) => {
           setMessage("Something went wrong!");
+        })
+        .finally(() => {
+          setTimeout(setter, 2000);
           setSpinnerVisibility(false);
           setDisabled(true);
-        })
-        .then(() => {
-          setTimeout(setter, 2000);
         });
     }
   }
