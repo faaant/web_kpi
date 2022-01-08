@@ -16,7 +16,7 @@ export default function Posts({ posts, deletePost }) {
       theme={post.Theme}
       post={post.Post}
       deletePost={deletePost}
-      key={post.Theme + post.Posts + Math.random() * 10000000}
+      key={post.ID}
     />
   ));
 }

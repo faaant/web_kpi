@@ -15,6 +15,7 @@ export default function Home() {
   const subscription = `
     subscription {
       Posts {
+        ID
         Theme
         Post
       }
@@ -53,7 +54,7 @@ export default function Home() {
         .catch(() => {
           setMessage("Error with request!");
         })
-        .then(() => {
+        .finally(() => {
           setTimeout(setter, 2000);
         });
     }
@@ -62,7 +63,7 @@ export default function Home() {
   return (
     <>
       <Messager message={message} />
-      {formVisibility === true ? <Form close={closeForm} /> : <></>}
+      {formVisibility ? <Form close={closeForm} /> : <></>}
       <div className={styles.container}>
         <Head>
           <title>Blog</title>
