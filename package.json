@@ -1,23 +1,25 @@
 {
-  "name": "kpi",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
-  },
-  "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/faaant/s.git"
-  },
-  "bugs": {
-    "url": "https://github.com/faaant/s/issues"
-  },
-  "homepage": "https://github.com/faaant/s#readme",
-  "description": "",
-  "dependencies": {
-    "husky": "^7.0.2"
+    "name": "kpi",
+    "workspaces": ["lab1", "lab2","lab3","lab4"],
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "prepare": "husky install"
+    },
+    "author": "",
+    "license": "ISC",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/faaant/s.git"
+    },
+    "bugs": {
+      "url": "https://github.com/faaant/s/issues"
+    },
+    "homepage": "https://github.com/faaant/s#readme",
+    "description": "",
+    "dependencies": {
+      "husky": "^7.0.2"
+    }
   }
-}
+

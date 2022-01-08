@@ -1,5 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd lab1 && npm run lint && npm run prettier && npm run slint && cd ../
+npm run lint --workspaces --if-present
+npm run slint --workspaces --if-present
+npm run prettier --workspaces --if-present
 
