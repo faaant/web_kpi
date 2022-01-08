@@ -1,4 +1,4 @@
-import styles from "../styles/components.module.scss";
+import styles from "../styles/Messager.module.scss";
 
 export default function Messager({ message }) {
   if (message.length) {

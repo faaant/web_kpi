@@ -1,0 +1,23 @@
+.left {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  img {
+    height: 250%;
+  }
+
+  [type="submit"] {
+    background-color: transparent;
+    width: 50%;
+    height: 80%;
+    border: var(--sea-dashed-border-1px);
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

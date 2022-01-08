@@ -1,4 +1,4 @@
-import styles from "../styles/components.module.scss";
+import styles from "../styles/MailError.module.scss";
 
 export default function MailError({ visibility }) {
   if (visibility) {
