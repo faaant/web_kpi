@@ -1,0 +1,141 @@
+.container {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  #checker {
+    display: none;
+  }
+
+  label {
+    .burger {
+      align-items: center;
+      display: block;
+      height: 30px;
+      justify-content: center;
+      position: fixed;
+      right: 2%;
+      top: 0;
+      width: 30px;
+      z-index: 5;
+
+      &::before {
+        background: var(--bg-silver);
+        border-radius: 50px;
+        content: '';
+        display: block;
+        height: 4px;
+        left: 0;
+        position: absolute;
+        top: 10px;
+        transition: 1s;
+        width: 100%;
+      }
+
+      &::after {
+        background: var(--bg-silver);
+        border-radius: 50px;
+        bottom: 10px;
+        content: '';
+        display: block;
+        height: 4px;
+        left: 0;
+        position: absolute;
+        transition: 1s;
+        width: 100%;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  #checker:checked ~ label .burger {
+    &::before {
+      border-radius: 50px;
+      content: '';
+      display: block;
+      height: 4px;
+      position: absolute;
+      top: 43%;
+      transform: rotate(45deg);
+      transition: 1s;
+      width: 100%;
+    }
+
+    &::after {
+      border-radius: 50px;
+      bottom: 42%;
+      content: '';
+      display: block;
+      height: 4px;
+      position: absolute;
+      transform: rotate(-45deg);
+      transition: 1s;
+      width: 100%;
+    }
+  }
+
+  .menu {
+    background-color: var(--bg-light-silver);
+    border: transparent;
+    font-size: 0;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: 1s;
+    width: 0;
+    z-index: 3;
+
+    .tab {
+      align-items: center;
+      border-bottom: solid var(--bg-silver) 1px;
+      display: flex;
+      height: 80px;
+      justify-content: center;
+      width: 100%;
+
+      &:hover {
+        background-color: var(--bg-lighter-silver);
+        cursor: pointer;
+      }
+    }
+
+    .top-distance{
+      border-top: solid var(--bg-silver) 1px;
+      margin-top: 40px;
+    }
+  }
+
+  #checker:checked ~ .menu {
+    border-left: var(--silver-border-1px);
+    font-size: 20px;
+    height: 100%;
+    min-width: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: 0.8s;
+    width: 50%;
+    z-index: 3;
+  }
+
+  .close-area {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition: 2s;
+    width: 100%;
+    z-index: 3;
+  }
+
+  #checker:checked ~ label .close-area {
+    display: block;
+  }
+}
