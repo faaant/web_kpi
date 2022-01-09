@@ -13,10 +13,10 @@ export async function fetchGraphQL(operationsDoc, operationName, variables) {
   return result.json();
 }
 
-export function executeMyMutation(operationsDoc) {
-  return fetchGraphQL(operationsDoc, "MyMutation", {});
+export function executeMyMutation(operationsDoc, vars) {
+  return fetchGraphQL(operationsDoc, "MyMutation", vars);
 }
 
-export async function startExecuteMyMutation(operationsDoc) {
-  return executeMyMutation(operationsDoc);
+export async function startExecuteMyMutation(operationsDoc, vars) {
+  return executeMyMutation(operationsDoc, vars);
 }

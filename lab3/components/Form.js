@@ -38,13 +38,16 @@ export default function Form({ close }) {
         }
 
         const operationsDoc = `
-          mutation MyMutation {
-            insert_Posts_one(object: {Post: "${data.meta.data.article.post}", Theme: "${data.meta.data.article.theme}"}) {
+          mutation MyMutation($post: String!, $theme: String!) {
+            insert_Posts_one(object: {Post: $post, Theme: $theme}) {
               ID
             }
           }
         `;
-        startExecuteMyMutation(operationsDoc)
+        startExecuteMyMutation(operationsDoc, {
+          post: data.meta.data.article.post,
+          theme: data.meta.data.article.theme,
+        })
           .then(() => {
             setMessage("Added!");
           })

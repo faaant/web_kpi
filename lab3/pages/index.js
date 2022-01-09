@@ -39,15 +39,15 @@ export default function Home() {
   }
 
   async function deletePost(e) {
-    if (e.target.parentNode.children[1]?.innerHTML) {
+    if (e.target.parentNode?.id) {
       const operationsDoc = `
-        mutation MyMutation {
-          delete_Posts(where: {Theme: {_eq: "${e.target.parentNode.childNodes[1].innerHTML}"}}){
+        mutation MyMutation($ID: uuid!) {
+          delete_Posts(where: {ID: {_eq: $ID}}){
             affected_rows
           }
         }
       `;
-      startExecuteMyMutation(operationsDoc)
+      startExecuteMyMutation(operationsDoc, { ID: e.target.parentNode.id })
         .then(() => {
           setMessage("Deleted!");
         })
