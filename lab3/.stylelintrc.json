@@ -1,9 +1,10 @@
 {
-  "extends": ["stylelint-prettier/recommended"],
-  "plugins": ["stylelint-prettier"],
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-prettier/recommended"
+  ],
+  "plugins": ["stylelint-prettier", "stylelint-scss"],
   "rules": {
-    "prettier/prettier": true,
-    "max-nesting-depth": [5],
-    "selector-max-compound-selectors": [5]
+    "prettier/prettier": true
   }
 }
