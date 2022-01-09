@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
     "lint:fix": "eslint --fix . --no-error-on-unmatched-pattern --ignore-path .gitignore",
-    "prettier": "prettier --check . --ignore-path .prettierignore",
-    "prettier:fix": "prettier --write . --ignore-path .prettierignore",
+    "prettier": "prettier --check . --ignore-path .gitignore",
+    "prettier:fix": "prettier --write . --ignore-path .gitignore",
     "slint": "stylelint \"**/*.scss\"",
     "slint:fix": "stylelint \"**/*.scss\" --fix"
   },
@@ -30,9 +30,7 @@
     "eslint-plugin-sonarjs": "^0.10.0",
     "prettier": "2.4.1",
     "sass": "^1.43.2",
-    "stylelint": "^14.0.1",
-    "stylelint-config-sass-guidelines": "^8.0.0",
-    "stylelint-config-standard": "^23.0.0",
-    "stylelint-config-standard-scss": "^2.0.0"
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-prettier": "^2.0.0"
   }
 }

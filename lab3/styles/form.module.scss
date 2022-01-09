@@ -9,7 +9,8 @@
 
   form {
     background-color: rgb(206, 203, 203);
-    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3), -5px -10px 20px rgba(255, 255, 255, 0.5);
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3),
+      -5px -10px 20px rgba(255, 255, 255, 0.5);
     display: grid;
     grid-gap: 0.5vw;
     grid-template-columns: minmax(auto, 20%) minmax(auto, 80%);
@@ -59,7 +60,7 @@
       }
     }
 
-    [name^='Theme'] {
+    [name^="Theme"] {
       background-color: transparent;
       border: transparent;
       border-bottom: var(--sea-solid-border-1-5px);
@@ -72,7 +73,7 @@
       width: 100%;
     }
 
-    [name='Post'] {
+    [name="Post"] {
       background-color: transparent;
       border: var(--sea-solid-border-1-5px);
       border-top: transparent;
@@ -109,7 +110,7 @@
 
       &::after {
         color: var(--text-color-red);
-        content: '\274c';
+        content: "\274c";
         position: absolute;
         right: 0;
         text-align: center;
