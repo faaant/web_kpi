@@ -18,8 +18,8 @@ export default function Form({ close }) {
     e.preventDefault();
     setSpinnerVisibility(true);
     const bodyToSend = {
-      theme: e.target.elements.Theme.value,
-      post: e.target.elements.Post.value,
+      theme: e.target.elements.Theme?.value,
+      post: e.target.elements.Post?.value,
     };
     fetch("/api/server", {
       method: "POST",
