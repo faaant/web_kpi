@@ -68,7 +68,7 @@ export default function Home() {
       </Head>
       <Messager message={message} />
       <form onSubmit={prevent}>
-        <div className={styles.mainContent}>
+        <div className={styles.main}>
           <div className={styles.recipient}>Email:</div>
           <div className={styles.mail}>
             <input
@@ -85,7 +85,7 @@ export default function Home() {
             maxLength="1250"
             required
           ></textarea>
-          <div className={styles.Button}>
+          <div className={styles.button}>
             <Button visibility={spinnerVisibility} isDisabled={disabled} />
           </div>
         </div>
