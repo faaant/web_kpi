@@ -58,7 +58,7 @@ export default function Form({ close }) {
       .catch(() => {
         setMessage("Error with adding info!");
       })
-      .then(() => {
+      .finally(() => {
         setSpinnerVisibility(false);
         setDisabled(true);
         setTimeout(setter, 2000);
