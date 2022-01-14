@@ -1,0 +1,129 @@
+.main {
+  display: grid;
+  grid-gap: 0.5vw;
+  grid-template-rows: minmax(auto, 5vh) minmax(auto, 60vh) minmax(auto, 10vh);
+  grid-template-columns: minmax(auto, 10vw) minmax(auto, 50vw);
+  padding: var(--padding-15px);
+  box-shadow: 5px 10px 20px rgb(0 0 0 / 30%),
+    -5px -10px 20px rgb(255 255 255 / 50%);
+
+  [name^="Email"] {
+    background-color: transparent;
+    width: 100%;
+    height: 90%;
+    text-indent: 5px;
+    border: none;
+    outline: none;
+    border-top: var(--sea-dashed-border-1px);
+    border-bottom: var(--sea-solid-border-1-5px);
+    border-right: var(--sea-solid-border-1-5px);
+    border-bottom-right-radius: 5px;
+  }
+
+  [name="letterValue"] {
+    grid-column: 1/3;
+    background-color: transparent;
+    border: var(--light-gray-border-2px);
+    border-top: none;
+    padding: var(--padding-10px) 0 0 var(--padding-10px);
+    width: 100%;
+    height: 98%;
+    outline: none;
+    resize: none;
+  }
+
+  .button {
+    grid-column-start: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.sender {
+  color: var(--text-gray);
+  border: var(--darkblue-border-2px);
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--padding-5px);
+  border-top-left-radius: 10px;
+
+  @media (max-width: 800px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 500px), (max-height: 400px) {
+    font-size: 0.5rem;
+  }
+
+  @media (max-width: 430px), (max-height: 300px) {
+    font-size: 0.4rem;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 0.25rem;
+  }
+
+  @media (max-width: 280px), (max-height: 190px) {
+    font-size: 0.12rem;
+  }
+
+  @media (max-width: 220px), (max-height: 100px) {
+    font-size: 0.01rem;
+  }
+}
+
+.recipient {
+  color: var(--text-gray);
+  border: var(--darkblue-border-2px);
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: var(--padding-5px);
+  border-bottom-left-radius: 10px;
+
+  @media (max-width: 800px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 500px), (max-height: 400px) {
+    font-size: 0.5rem;
+  }
+
+  @media (max-width: 430px), (max-height: 300px) {
+    font-size: 0.4rem;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 0.25rem;
+  }
+
+  @media (max-width: 280px), (max-height: 190px) {
+    font-size: 0.12rem;
+  }
+
+  @media (max-width: 220px), (max-height: 100px) {
+    font-size: 0.01rem;
+  }
+}
+
+.mail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}

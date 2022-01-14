@@ -1,0 +1,15 @@
+.wrong {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 105%;
+  padding-left: var(--padding-5px);
+  text-indent: var(--padding-10px);
+  width: fit-content;
+  height: 100%;
+  border-left: var(--sea-solid-border-1-5px);
+
+  img {
+    height: 100%;
+  }
+}
