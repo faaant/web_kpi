@@ -1,5 +1,5 @@
 # web_kpi
-1-ша лаба - https://web-kpi-2jtazzobw-faaant.vercel.app/
-2-га лаба - https://web-kpi-jom04l32x-faaant.vercel.app/
-3-тя лаба - https://web-kpi-1zroz78lw-faaant.vercel.app/
-4-та лаба - https://web-kpi-ek14sdwtn-faaant.vercel.app/
+[LAB1](https://web-kpi-2jtazzobw-faaant.vercel.app/) - simple HTML page<br/> 
+[LAB2](https://web-kpi-jom04l32x-faaant.vercel.app/) - send mail form  <br/>
+[LAB3](https://web-kpi-1zroz78lw-faaant.vercel.app/) - todo app <br/>
+[LAB4](https://web-kpi-ek14sdwtn-faaant.vercel.app/) - slider and burger using HTML+CSS <br/>
