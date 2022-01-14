@@ -1,0 +1,97 @@
+.container {
+  display: grid;
+  grid-template-rows: minmax(80px, 10%) minmax(auto, 1fr) minmax(80px, 10%);
+  height: 100vh;
+
+  main {
+    display: grid;
+    grid-auto-rows: minmax(auto, max-content);
+    grid-column-gap: 3.5%;
+    grid-template-columns: minmax(auto, 30%) minmax(auto, 30%) minmax(auto, 30%);
+    padding: var(--padding-2per);
+
+    div {
+      border-bottom: var(--border-solid-silver-1px);
+      border-bottom-right-radius: 50px;
+      border-right: var(--border-solid-silver-1px);
+      border-top-left-radius: 50px;
+      font-size: 1.5em;
+      margin: 3.5% 0 10%;
+      text-align: center;
+      word-wrap: break-word;
+
+      p {
+        border-left: var(--border-solid-tomato-1px);
+        font-size: 1em;
+        padding: var(--padding-3per);
+        text-align: justify;
+      }
+
+      &:hover {
+        box-shadow: 0 0 10px 4px var(--silver);
+        cursor: pointer;
+      }
+    }
+  }
+
+  header {
+    border-bottom: var(--border-solid-silver-1px);
+    display: flex;
+    position: relative;
+
+    .add {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      div {
+        border-left: transparent;
+        height: 100%;
+        position: relative;
+        transition: 1s;
+        width: 10%;
+
+        &::after {
+          color: var(--text-color-grey);
+          content: "\2b";
+          font-size: 50px;
+          height: 100%;
+          opacity: 0.7;
+          position: absolute;
+          text-align: center;
+          width: 100%;
+        }
+
+        &:hover {
+          background-color: var(--green-background);
+          border-left: var(--border-solid-silver-1px);
+          cursor: pointer;
+          transition: 1s;
+          width: 20%;
+        }
+      }
+    }
+  }
+
+  .loader {
+    align-items: center;
+    border: transparent;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      box-shadow: none;
+      cursor: default;
+    }
+
+    img {
+      height: 50%;
+      width: 20%;
+    }
+  }
+
+  footer {
+    background-color: var(--blue-background);
+    height: 100%;
+  }
+}

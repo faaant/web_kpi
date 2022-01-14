@@ -19,6 +19,15 @@ jobs:
       - name: Check folder Lab2
         working-directory: lab2
         run: npm ci && npm run prettier && npm run lint && npm run slint
+  build_and_preview_lab3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          cache: "npm"
+      - name: Check folder Lab3
+        working-directory: lab3
+        run: npm ci && npm run prettier && npm run lint && npm run slint
   build_and_preview_lab4:
     runs-on: ubuntu-latest
     steps:
